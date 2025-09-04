@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body a {
+  text-decoration: none;
+  color: black;
+}
+
+.d_none {
+  display: none !important;
+}
+
+.content_wrapper {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.p-lr-1r {
+  padding: 0 1rem;
+}
