@@ -1,0 +1,18 @@
+Fonts:
+"Michroma" for the dialog - portable Pokedex design,
+"Merienda" for the body - normal Page - antiquewhite with red + black fontcolors
+"Oswald" for footer + header - Red with white font
+
+Pagedesign:
+upper section: searchbar
+middle section: Pokecards with picture, name and classes. Backgroundcolor same like class
+(first 20 pokemon loaded)
+lower section: Loading button for further Pokemon. (20 again)
+
+Pokedexdesign (dialog):
+left upper section: picture with backgroundcolor of his class
+left middle section: open/close button. buttons for next or previouse Pokemon
+left lower section: pokemonname / class
+
+right upper section: triple slide menu
+right middle + lower section: three slides with information about the pokemon
