@@ -1,7 +1,7 @@
 header, footer {
     display: flex;
-    background-color: rgba(250, 203, 0);
-    color: rgba(62, 96, 173);
+    background-color: rgb(250, 203, 0);
+    color: rgb(62, 96, 173);
     height: 6rem;
 }
 
@@ -16,14 +16,35 @@ header img {
 }
 
 #page_content {
-    background-color: antiquewhite;
+    background-color: rgb(250, 235, 215);
     display: flex;
     flex: 1;
+}
+
+#main_content_container {
+    display: flex ;
+    flex-direction: column;
+}
+
+#pokemon_card_box {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 footer {
     align-items: center;
     font-weight: 600;
+}
+
+#pokesearch_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-wrap: nowrap;
 }
 
 #pokesearch_title_img {
