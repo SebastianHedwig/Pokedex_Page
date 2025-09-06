@@ -1,7 +1,7 @@
 Fonts:
 "Michroma" for the dialog - portable Pokedex design,
-"Merienda" for the body - normal Page - antiquewhite with red + black fontcolors
-"Oswald" for footer + header - Red with white font
+"Merienda" for the body - normal Page - antiquewhite with blue + black/white fontcolors
+"Oswald" for footer + header - white with yellow/blue font
 
 Pagedesign:
 upper section: searchbar
