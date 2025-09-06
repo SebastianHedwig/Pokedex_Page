@@ -7,6 +7,12 @@
   scroll-behavior: smooth;
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 body a {
   text-decoration: none;
   color: black;

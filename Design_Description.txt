@@ -5,7 +5,7 @@ Fonts:
 
 Pagedesign:
 upper section: searchbar
-middle section: Pokecards with picture, name and classes. Backgroundcolor same like class
+middle section: Pokecards with number, picture, name and classes. Backgroundcolor same like class
 (first 20 pokemon loaded)
 lower section: Loading button for further Pokemon. (20 again)
 

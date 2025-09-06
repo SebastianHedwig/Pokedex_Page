@@ -1,4 +1,32 @@
 header, footer {
+    display: flex;
     background-color: rgba(250, 203, 0);
     color: rgba(62, 96, 173);
+    height: 6rem;
+}
+
+header img {
+    max-height: 4.5rem;
+}
+
+#header_content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#page_content {
+    background-color: antiquewhite;
+    display: flex;
+    flex: 1;
+}
+
+footer {
+    align-items: center;
+    font-weight: 600;
+}
+
+#pokesearch_title_img {
+    max-height: 6rem;
+    max-width: 100%;
 }
