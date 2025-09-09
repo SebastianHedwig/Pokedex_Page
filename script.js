@@ -1,6 +1,6 @@
 function init(){
     renderHeaderTemplate();
-    renderPageCOntentSkeletonTemplate();
+    renderPageContentSkeletonTemplate();
     renderFooterTemplate();
 }
 
@@ -14,7 +14,7 @@ function renderFooterTemplate() {
     pageFooterRef.innerHTML = getFooterTemplate();
 }
 
-function renderPageCOntentSkeletonTemplate() {
+function renderPageContentSkeletonTemplate() {
     const pageContentRef = document.getElementById('page_content');
     pageContentRef.innerHTML = getPageContentSkeletonTemplate();
 }
