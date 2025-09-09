@@ -8,19 +8,19 @@ function getHeaderTemplate() {
 }
 
 function getPageContentSkeletonTemplate() {
-    return /*html*/ `
-        <div id="main_content_container" class="content_wrapper p-lr-2r">
-            <div id="pokesearch_container">
-                <img id="pokesearch_title_img" src="./assets/img/Pokesearch_Logo_textstudio.png" alt="Pokesearch Schriftzug">
-                <form id="pokesearch_box">
-                    <input type="search">
-                    <button type="submit">Suchen</button>
-                </form>
-
-            </div>
-            <div id="pokemon_card_box"></div>
-        </div>
-    `;
+  return /*html*/ `
+    <div id="main_content_container" class="content_wrapper p-lr-2r">
+      <div id="pokesearch_container">
+        <img id="pokesearch_title_img" src="./assets/img/Pokesearch_Logo_textstudio.png" alt="Pokesearch Schriftzug">
+        <form id="pokesearch_box">
+          <label class="visually-hidden" for="pokesearch_input">Pokémon-Suche</label>
+          <input id="pokesearch_input" type="search" placeholder="Suche Dein(e) Pokemon">
+          <button type="submit" aria-label="Pokémon suchen">Suchen</button>
+        </form>
+      </div>
+      <div id="pokemon_card_box"></div>
+    </div>
+  `;
 }
 
 

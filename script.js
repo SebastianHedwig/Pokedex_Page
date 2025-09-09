@@ -1,20 +1,21 @@
-function init(){
-    renderHeaderTemplate();
-    renderPageContentSkeletonTemplate();
-    renderFooterTemplate();
+function init() {
+  renderHeader();
+  renderContentSkeleton();
+  renderFooter();
 }
 
-function renderHeaderTemplate() {
-    const pageHeadRef = document.getElementById('page_head');
-    pageHeadRef.innerHTML = getHeaderTemplate();
+function getEl(id) {
+  return document.getElementById(id);
 }
 
-function renderFooterTemplate() {
-    const pageFooterRef = document.getElementById('page_footer');
-    pageFooterRef.innerHTML = getFooterTemplate();
+function renderHeader() {
+  getEl("page_head").innerHTML = getHeaderTemplate();
 }
 
-function renderPageContentSkeletonTemplate() {
-    const pageContentRef = document.getElementById('page_content');
-    pageContentRef.innerHTML = getPageContentSkeletonTemplate();
+function renderFooter() {
+  getEl("page_footer").innerHTML = getFooterTemplate();
+}
+
+function renderContentSkeleton() {
+  getEl("page_content").innerHTML = getPageContentSkeletonTemplate();
 }
