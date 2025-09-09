@@ -1,10 +1,9 @@
 // Main-Templates:
 function getHeaderTemplate() {
-    return /*html*/ `
+  return /*html*/ `
         <div id="header_content" class="content_wrapper p-lr-2r">
             <img class="header_logo" src="./assets/img/Pokedex_Logo_textstudio.png" alt="Pokedex Logo">
-        </div>
-    `;
+        </div>`;
 }
 
 function getPageContentSkeletonTemplate() {
@@ -18,16 +17,43 @@ function getPageContentSkeletonTemplate() {
           <button type="submit" aria-label="Pokémon suchen">Suchen</button>
         </form>
       </div>
-      <div id="pokemon_card_box"></div>
-    </div>
-  `;
+      <div id="pokemon_cards_container"></div>
+      ${getLoadPokeBtnTemplate()}
+    </div>`;
 }
 
+function getPokemonCardTemplate(poke) {
+  const id = poke.id;
+  const name = formatName(poke.name);
+  const img = getPokemonImage(poke);
+  const types = getTypeIcons(poke);
+
+  return /*html*/ `
+    <article class="poke_card">
+      <div class="card_title_box" id="pokeCard_title_${id}">#${id} ${name}</div>
+      <div class="card_img_box" id="pokeCard_img_${id}">${img}</div>
+      <div class="card_type_box" id="pokeCard_type_${id}">${types}</div>
+    </article>`;
+}
+
+function getPokemonCardsContainerTemplate() {
+  return /*html*/ `
+    <div id="pokemon_cards_container"></div>`;
+}
+
+function getTypeIconTemplate(typeName) {
+  return /*html*/ `
+    <img class="type_icon" src="./assets/icons/poke_types/${typeName}.png" alt="Pokemon type icon for ${typeName}.">`;
+}
+
+function getLoadPokeBtnTemplate() {
+  return /*html*/ `
+    <button id="load_btn" onclick="loadPokemon()">Mehr laden</button>`;
+}
 
 function getFooterTemplate() {
-    return /*html*/ `
-        <div id="footer_content" class="content_wrapper p-lr-2r">
-            <span>© 2025 Sebastian Hedwig</span>
-        </div>         
-    `;
+  return /*html*/ `
+    <div id="footer_content" class="content_wrapper p-lr-2r">
+        <span>© 2025 Sebastian Hedwig</span>
+    </div>`;
 }

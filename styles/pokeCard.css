@@ -1,0 +1,43 @@
+#pokemon_cards_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 5rem auto;
+  padding: 1rem 0;
+  gap: 1rem;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.poke_card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgb(255, 255, 255);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.poke_card:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.poke_img {
+  height: 12rem;
+  background-color: aqua;
+  border-radius: 0.5rem;
+}
+
+.type_icon {
+  height: 4rem;
+  vertical-align: middle;
+}
+
+.card_title_box,
+.card_type_box {
+  background-color: rgb(250, 203, 0);
+  border-radius: 12rem;
+}
