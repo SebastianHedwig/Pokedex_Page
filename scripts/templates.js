@@ -14,7 +14,7 @@ function getPageContentSkeletonTemplate() {
                 <img id="pokesearch_title_img" src="./assets/img/Pokesearch_Logo_textstudio.png" alt="Pokesearch Schriftzug">
                 <form id="pokesearch_box">
                     <input type="search">
-                    <input type="button" value="Search">
+                    <button type="submit">Suchen</button>
                 </form>
 
             </div>
