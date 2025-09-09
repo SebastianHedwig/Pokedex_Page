@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 5rem auto;
+  margin: 1rem auto;
   padding: 1rem 0;
   gap: 1rem;
   overflow-y: scroll;

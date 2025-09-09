@@ -18,6 +18,8 @@ header img {
 #page_content {
   background-color: rgb(250, 235, 215);
   display: flex;
+  flex: 1;
+  overflow-y: auto;
 }
 
 #main_content_container {
