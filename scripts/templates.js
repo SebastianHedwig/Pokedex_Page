@@ -28,6 +28,10 @@ function getPokemonCardTemplate(poke) {
   const img = getPokemonImage(poke);
   const types = getTypeIcons(poke);
 
+  return buildPokemonCardTemplate(id, name, img, types);
+}
+
+function buildPokemonCardTemplate(id, name, img, types) {
   return /*html*/ `
     <article class="poke_card">
       <div class="card_title_box" id="pokeCard_title_${id}">#${id} ${name}</div>

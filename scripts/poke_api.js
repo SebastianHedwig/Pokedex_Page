@@ -5,7 +5,7 @@ async function fetchPokemonData(pokeNameOrId) {
 }
 
 async function loadPokemonBatch(offset = 0, size = 20) {
-  const ids = Array.from({ length: size }, (_, i) => offset + i + 1);
+  const ids = Array.from({length: size}, (_, i) => offset + i + 1);
   return Promise.all(ids.map(fetchPokemonData));
 }
 
@@ -25,7 +25,7 @@ function getPokemonImage(poke) {
 }
 
 function getTypeIcons(poke) {
-  const types = poke.types || [];
+  const types = poke.types;
   if (!types.length) return "Unbekannt";
 
   return types
