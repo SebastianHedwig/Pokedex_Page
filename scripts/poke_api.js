@@ -4,7 +4,7 @@ async function fetchPokemonData(pokeNameOrId) {
   return pokeList.json();
 }
 
-async function loadPokemonBatch(offset = 0, size = 20) {
+async function loadPokemonBatch(offset = 0, size = 28) {
   const ids = Array.from({length: size}, (_, i) => offset + i + 1);
   return Promise.all(ids.map(fetchPokemonData));
 }
@@ -24,7 +24,8 @@ function getPokemonImage(poke) {
   if (!url) return "";
 
   const mainType = poke.types?.[0]?.type?.name || "unknown";
-  return /*html*/ `<img class="poke_img ${mainType}" src="${url}" alt="${poke.name}">`;
+  return /*html*/ `
+    <img class="poke_img ${mainType}" src="${url}" alt="Picture of ${poke.name}">`;
 }
 
 function getTypeIcons(poke) {

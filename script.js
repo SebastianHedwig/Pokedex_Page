@@ -1,7 +1,7 @@
 const pokeCache = [];
 
 let currentOffset = 0;
-const pageSize = 20;
+const pageSize = 28;
 
 function init() {
   renderHeader();
