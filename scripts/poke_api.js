@@ -21,7 +21,10 @@ function formatName(name) {
 
 function getPokemonImage(poke) {
   const url = poke.sprites?.other?.["official-artwork"]?.front_default;
-  return url ? /*html*/ `<img class="poke_img" src="${url}" alt="${poke.name}">` : "";
+  if (!url) return "";
+
+  const mainType = poke.types?.[0]?.type?.name || "unknown";
+  return /*html*/ `<img class="poke_img ${mainType}" src="${url}" alt="${poke.name}">`;
 }
 
 function getTypeIcons(poke) {
