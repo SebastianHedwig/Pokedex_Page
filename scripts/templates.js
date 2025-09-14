@@ -40,7 +40,7 @@ function getPokemonCardTemplate(poke) {
 
 function buildPokemonCardTemplate(id, name, img, types) {
   return /*html*/ `
-    <article class="poke_card">
+    <article class="poke_card" onclick="openPokeDialog(${id})">
       <div class="card_title_box" id="pokeCard_title_${id}">#${id} - ${name}</div>
       <div class="card_img_box" id="pokeCard_img_${id}">${img}</div>
       <div class="card_type_box" id="pokeCard_type_${id}">${types}</div>
