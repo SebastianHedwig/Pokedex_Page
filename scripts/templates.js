@@ -1,9 +1,16 @@
 // Main-Templates:
+function getStartOverlay() {
+  return /*html*/ `
+    <div class="overlay_panel overlay_panel--left"></div>
+    <div class="overlay_panel overlay_panel--right"></div>
+    <img src="./assets/img/pokeball_512_spinner_flaticon.png" class="overlay_spinner" alt="Lade Pokeball">`;
+}
+
 function getHeaderTemplate() {
   return /*html*/ `
-        <div id="header_content" class="content_wrapper p-lr-1r">
-            <img class="header_logo" src="./assets/img/Pokedex_Logo_textstudio.png" alt="Pokedex Logo">
-        </div>`;
+    <div id="header_content" class="content_wrapper p-lr-1r">
+        <img class="header_logo" src="./assets/img/Pokedex_Logo_textstudio.png" alt="Pokedex Logo">
+    </div>`;
 }
 
 function getPageContentSkeletonTemplate() {

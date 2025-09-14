@@ -6,6 +6,7 @@
 
     <script src="./scripts/poke_api.js"></script>
 
+    <link rel="stylesheet" href="./styles/overlay_start.css">
     <link rel="stylesheet" href="./styles/standart.css">
     <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./styles/pokecard.css">
@@ -18,6 +19,7 @@
     <title>Pokedex</title>
 </head>
 <body onload="init()">
+    <div id="cover_overlay" class="overlay"></div>
     
     <header id="page_head"></header>
 
@@ -27,6 +29,7 @@
 
     <dialog id="dialog" class="d_none"></dialog>
 
+    <script src="./scripts/overlay_start.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/dialog.js"></script>
     <script src="./scripts/mobile_dialog.js"></script>

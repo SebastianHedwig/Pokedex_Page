@@ -1,0 +1,54 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: all;
+  background: transparent;
+}
+
+.overlay_panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: rgb(250, 203, 0);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35) inset;
+  transition: transform 1.2s ease-in-out;
+  will-change: transform;
+}
+
+.overlay_panel--left {
+  left: 0;
+  transform: translateX(0%);
+}
+.overlay_panel--right {
+  right: 0;
+  transform: translateX(0%);
+}
+
+.overlay_spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 6rem;
+  animation: spin 1s linear infinite;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.overlay--curtain-open .overlay_panel--left {
+  transform: translateX(-100%);
+}
+.overlay--curtain-open .overlay_panel--right {
+  transform: translateX(100%);
+}
+.overlay--curtain-open .overlay_spinner {
+  opacity: 0;
+}

@@ -4,6 +4,8 @@ let currentOffset = 0;
 const pageSize = 28;
 
 function init() {
+  renderStartOverlay();
+  startOverlay();
   renderHeader();
   renderContentSkeleton();
   renderFooter();
@@ -12,6 +14,10 @@ function init() {
 
 function getEl(id) {
   return document.getElementById(id);
+}
+
+function renderStartOverlay() {
+  getEl("cover_overlay").innerHTML = getStartOverlay();
 }
 
 function renderHeader() {
