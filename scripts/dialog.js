@@ -262,7 +262,7 @@
       fetchSpeciesById(p.id),
       fetchLocationsTop5(p.id),
     ]);
-    const locations = locs.length > 0 ? locs : ["Unbekannt"];
+    const locations = locs.length > 0 ? locs : ["Unknown"];
     return tplMainStatic(p, sp, locations);
   }
 
