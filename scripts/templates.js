@@ -29,11 +29,11 @@ function getPageContentSkeletonTemplate() {
     </div>`;
 }
 
-function getPokemonCardTemplate(poke) {
-  const id = poke.id;
-  const name = formatName(poke.name);
-  const img = getPokemonImage(poke);
-  const types = getTypeIcons(poke);
+function getPokemonCardTemplate(pokemon) {
+  const id = pokemon.id;
+  const name = formatName(pokemon.name);
+  const img = getPokemonImage(pokemon);
+  const types = getTypeIcons(pokemon);
 
   return buildPokemonCardTemplate(id, name, img, types);
 }

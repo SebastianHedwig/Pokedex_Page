@@ -25,6 +25,27 @@ const TYPE_MAP = {
   "fee":"fairy"
 };
 
+const POKEMON_TYPES = [
+  "normal",
+  "fire",
+  "water",
+  "grass",
+  "electric",
+  "ice",
+  "fighting",
+  "poison",
+  "ground",
+  "flying",
+  "psychic",
+  "bug",
+  "rock",
+  "ghost",
+  "dark",
+  "dragon",
+  "steel",
+  "fairy"
+];
+
 function initSearch() {
   const form = getEl("pokesearch_box");
   const input = getEl("pokesearch_input");
@@ -33,43 +54,44 @@ function initSearch() {
   input.oninput = onSearchInput;
 }
 
-function onSearchSubmit(e) {
-  e.preventDefault();
-  const q = getQuery();
-  if (q.length < SEARCH_MIN_LENGTH) return;
-  runApiSearch(q);
+function onSearchSubmit(event) {
+  event.preventDefault();
+  const query = getQuery();
+  if (query.length < SEARCH_MIN_LENGTH) return;
+  runApiSearch(query);
 }
 
-function onSearchInput(e) {
-  const q = e.target.value.trim().toLowerCase();
+function onSearchInput(event) {
+  const query = event.target.value.trim().toLowerCase();
   clearTimeout(searchDebounceTimer);
-  searchDebounceTimer = setTimeout(() => performLocalSearch(q), 200);
+  searchDebounceTimer = setTimeout(() => performLocalSearch(query), 200);
 }
 
 function getQuery() {
   return getEl("pokesearch_input").value.trim().toLowerCase();
 }
 
-function performLocalSearch(q) {
-  if (q.length < SEARCH_MIN_LENGTH) return renderCards(pokeCache);
-  renderCards(filterPokemonLocal(q));
+function performLocalSearch(query) {
+  if (query.length < SEARCH_MIN_LENGTH)
+    return renderCards(pokeCache);
+  renderCards(filterPokemonLocal(query));
 }
 
-function filterPokemonLocal(q) {
-  return pokeCache.filter(p =>
-    p.name?.toLowerCase().includes(q) ||
-    String(p.id) === q ||
-    p.types?.some(t => t.type?.name?.includes(q))
+function filterPokemonLocal(query) {
+  return pokeCache.filter(pokemon =>
+    pokemon.name?.toLowerCase().includes(query) ||
+    String(pokemon.id) === query ||
+    pokemon.types?.some(typeInfo => typeInfo.type?.name?.includes(query))
   );
 }
 
-async function runApiSearch(q) {
+async function runApiSearch(query) {
   showCardsSpinner();
   try {
-    const byName = await findNameMatches(q);
-    const typeKey = resolveType(q);
+    const byName = await findNameMatches(query);
+    const typeKey = resolveType(query);
     const byType = typeKey ? await getTypePokemon(typeKey) : [];
-    const merged = unique([...byType, ...byName]);
+    const merged = removeDuplicates([...byType, ...byName]);
     const data = await fetchPokemonList(merged);
     mergeIntoCache(data);
     await sleep(500); 
@@ -84,49 +106,54 @@ function showCardsSpinner() {
   <img class="overlay_spinner" src="${img}" alt="Lade Pokeball">`;
 }
 
-async function findNameMatches(q) {
+async function findNameMatches(query) {
   const index = await getAllPokemonIndex();
-  return index.filter(n => n.includes(q));
+  return index.filter(name => name.includes(query));
 }
 
 async function getAllPokemonIndex() {
   if (allPokeIndex) return allPokeIndex;
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20000&offset=0");
-  const json = await res.json();
-  allPokeIndex = json.results.map(it => it.name);
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20000&offset=0");
+  const DataList = await response.json();
+  allPokeIndex = DataList.results.map(pokemon => pokemon.name);
   return allPokeIndex;
 }
 
-function normalizeUmlauts(s) {
-  return s.replaceAll("ä","ae").replaceAll("ö","oe").replaceAll("ü","ue").replaceAll("ß","ss");
+function normalizeModifiedVowels(text) {
+  return text
+    .replaceAll("ä","ae")
+    .replaceAll("ö","oe")
+    .replaceAll("ü","ue")
+    .replaceAll("ß","ss");
 }
 
-function resolveType(q) {
-  const en = ["normal","fire","water","grass","electric","ice","fighting","poison",
-    "ground","flying","psychic","bug","rock","ghost","dark","dragon","steel","fairy"];
-  const normQ = normalizeUmlauts(q);
-  if (TYPE_MAP[q]) return TYPE_MAP[q];
-  if (TYPE_MAP[normQ]) return TYPE_MAP[normQ];
-  const hitDe = Object.keys(TYPE_MAP).filter(k => {
-    const nk = normalizeUmlauts(k);
-    return k.startsWith(q) || nk.startsWith(normQ);
-  });
-  if (hitDe.length === 1) return TYPE_MAP[hitDe[0]];
-  const hitEn = en.filter(t => t.startsWith(q));
-  return hitEn.length === 1 ? hitEn[0] : null;
+function resolveType(query) {
+  const normalizedQuery = normalizeModifiedVowels(query);
+
+  const direct = TYPE_MAP[query] || TYPE_MAP[normalizedQuery];
+  if (direct) return direct;
+
+  const germanMatch = Object.keys(TYPE_MAP).find(function (key) {
+    const normalizedKey = normalizeModifiedVowels(key);
+    return key.indexOf(query) === 0 || normalizedKey.indexOf(normalizedQuery) === 0});
+  if (germanMatch) return TYPE_MAP[germanMatch];
+
+  const englishMatch = POKEMON_TYPES.find(function (type) {
+    return type.indexOf(query) === 0});
+  return englishMatch || null;
 }
 
 async function getTypePokemon(typeKey) {
-  const res = await fetch(`https://pokeapi.co/api/v2/type/${typeKey}`);
-  const json = await res.json();
-  return json.pokemon.map(p => p.pokemon.name);
+  const response = await fetch(`https://pokeapi.co/api/v2/type/${typeKey}`);
+  const dataList = await response.json();
+  return dataList.pokemon.map(e => e.pokemon.name);
 }
 
 async function fetchPokemonList(names) {
-  const tasks = names.map(n => fetchPokemonData(n));
+  const tasks = names.map(name => fetchPokemonData(name));
   return Promise.all(tasks);
 }
 
-function unique(arr) {
+function removeDuplicates(arr) {
   return [...new Set(arr)];
 }

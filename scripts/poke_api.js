@@ -10,15 +10,15 @@ async function loadPokemonBatch(offset = 0, size = 28) {
 }
 
 function cachePokemon(list) {
-  const ids = new Set(pokeCache.map(p => p.id));
-  list.forEach(p => { if (!ids.has(p.id)) pokeCache.push(p);ids.add(p.id);});
+  const ids = new Set(pokeCache.map(pokemon => pokemon.id));
+  list.forEach(pokemon => { if (!ids.has(pokemon.id)) pokeCache.push(pokemon);ids.add(pokemon.id);});
   pokeCache.sort((a, b) => a.id - b.id);
   return pokeCache.length;
 }
 
 function mergeIntoCache(list) {
-  const ids = new Set(pokeCache.map(p => p.id));
-  list.forEach(p => { if (!ids.has(p.id)) pokeCache.push(p);ids.add(p.id);});
+  const ids = new Set(pokeCache.map(pokemon => pokemon.id));
+  list.forEach(pokemon => { if (!ids.has(pokemon.id)) pokeCache.push(pokemon);ids.add(pokemon.id);});
   pokeCache.sort((a, b) => a.id - b.id);
   return pokeCache.length;
 }
@@ -41,7 +41,5 @@ function getTypeIcons(poke) {
   const types = poke.types;
   if (!types.length) return "Unknown";
 
-  return types
-    .map(t => getTypeIconTemplate(t.type.name))
-    .join(" ");
+  return types.map(t => getTypeIconTemplate(t.type.name)).join(" ");
 }

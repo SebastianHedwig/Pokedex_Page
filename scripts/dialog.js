@@ -58,21 +58,13 @@
 
   function tplNav(active) {
     const items = ["main", "stats", "abilities", "evo"];
-    const labels = {
-      main: "Main",
-      stats: "Stats",
-      abilities: "Abilities",
-      evo: "Evo-Chain",
-    };
+    const labels = {main: "Main", stats: "Stats", abilities: "Abilities",evo: "Evo-Chain",};
     return /*html*/ `
       <nav class="dexdlg__nav" role="tablist">
-        ${items
-          .map(
-            (t) => /*html*/ `
+        ${items.map((t) => /*html*/ `
           <button class="tab ${active === t ? "is-active" : ""}"
                   data-tab="${t}" role="tab" aria-selected="${active === t}"
-                  onclick="setDialogTab('${t}')">${labels[t]}</button>`
-          )
+                  onclick="setDialogTab('${t}')">${labels[t]}</button>`)
           .join("")}
       </nav>`;
   }
@@ -84,21 +76,11 @@
     return /*html*/ `
       <div class="kv"><span>ID</span><span>#${p.id}</span></div>
       <div class="kv"><span>Type(s)</span><span>${types}</span></div>
-      <div class="kv"><span>Height</span><span>${(p.height / 10).toFixed(
-        1
-      )} m</span></div>
-      <div class="kv"><span>Weight</span><span>${(p.weight / 10).toFixed(
-        1
-      )} kg</span></div>
-      <div class="kv"><span>Base Experience</span><span>${
-        p.base_experience
-      }</span></div>
-      <div class="kv"><span>Capture Rate</span><span>${
-        sp.capture_rate
-      } %</span></div>
-      <div class="kv"><span>Base Happiness</span><span>${
-        sp.base_happiness
-      }</span></div>
+      <div class="kv"><span>Height</span><span>${(p.height / 10).toFixed(1)} m</span></div>
+      <div class="kv"><span>Weight</span><span>${(p.weight / 10).toFixed(1)} kg</span></div>
+      <div class="kv"><span>Base Experience</span><span>${p.base_experience}</span></div>
+      <div class="kv"><span>Capture Rate</span><span>${sp.capture_rate} %</span></div>
+      <div class="kv"><span>Base Happiness</span><span>${sp.base_happiness}</span></div>
       <div class="kv"><span>Locations</span><ul class="location-list">${list}</ul></div>`;
   }
 
@@ -110,38 +92,30 @@
   }
 
   function tplStats(p) {
-    return (p.stats || [])
-      .map((s) => {
-        const v = s.base_stat;
-        const w = Math.min(v, 150) / 1.5;
-        return /*html*/ `
+    return (p.stats || []).map((s) => {
+      const v = s.base_stat;
+      const w = Math.min(v, 150) / 1.5;
+      return /*html*/ `
         <div class="bar">
           <span class="bar__label">${s.stat.name}</span>
           <div class="bar__track"><i style="width:${w}%">${v}</i></div>
-        </div>`;
-      })
+        </div>`})
       .join("");
   }
 
   function tplAbilitiesCards(cards) {
-    return cards
-      .map(
-        (c) => /*html*/ `
+    return cards.map((c) => /*html*/ `
       <div class="ability-card">
         <h4>${c.title}</h4>
         <p>${c.effect}</p>
-      </div>`
-      )
+      </div>`)
       .join("");
   }
 
   function tplEvoChain(pokes) {
     const sep = /*html*/ `<div class="evo_arrow">↓</div>`;
     return /*html*/ `
-      <div class="evo_chain">${pokes
-      .map(tplEvoItem)
-      .join(sep)}
-      </div>`;
+      <div class="evo_chain">${pokes.map(tplEvoItem).join(sep)}</div>`;
   }
 
   function tplEvoItem(p) {
@@ -153,67 +127,65 @@
   }
 
   // ========== Fetch + Format Helpers ==========
-async function fetchSpeciesByUrl(url) {
-  const r = await fetch(url);
-  return r.json();
-}
+  async function fetchSpeciesByUrl(url) {
+    const r = await fetch(url);
+    return r.json();
+  }
 
-function getDefaultVarietyName(species) {
-  const def = species.varieties?.find(v => v.is_default);
-  return def?.pokemon?.name || species.name;
-}
+  function getDefaultVarietyName(species) {
+    const def = species.varieties?.find(v => v.is_default);
+    return def?.pokemon?.name || species.name;
+  }
 
   async function fetchEvolutionChain(url) {
     const r = await fetch(url);
     return r.json();
   }
 
-async function fetchLocationsTop5ByName(name) {
-  const r = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/encounters`);
-  const data = await r.json();
-  return data.map(l => l.location_area.name.replace(/-/g, " ")).slice(0, 5);
-}
+  async function fetchLocationsTop5ByName(name) {
+    const r = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/encounters`);
+    const data = await r.json();
+    return data.map(l => l.location_area.name.replace(/-/g, " ")).slice(0, 5);
+  }
 
   async function fetchAbility(url) {
     const r = await fetch(url);
     return r.json();
   }
 
-  function extractEvoSpecies(node) {
-    const out = [];
-    (function walk(n) {
-      out.push(n.species.name);
-      n.evolves_to?.forEach(walk);
-    })(node);
-    return out;
+  function fetchEvoSpecies(evoStart) {
+    const evoList = [];
+    (function chain(current) {evoList.push(current.species.name);
+      current.evolves_to?.forEach(chain)})(evoStart);
+    return evoList;
   }
 
   async function ensurePokemonInCacheByName(name) {
-    let p = pokeCache.find((x) => x.name === name);
-    if (!p) {
-      p = await fetchPokemonData(name);
-      cachePokemon([p]);
+    let pokemon = pokeCache.find((x) => x.name === name);
+    if (!pokemon) {
+      pokemon = await fetchPokemonData(name);
+      cachePokemon([pokemon]);
     }
-    return p;
+    return pokemon;
   }
 
-  function mapAbilityCard(a, data) {
+  function mapAbilityCard(abilityInfo, data) {
     const en = data.effect_entries.find((e) => e.language.name === "en");
-    const title = `${a.ability.name}${a.is_hidden ? " (Hidden)" : ""}`;
+    const title = `${abilityInfo.ability.name}${abilityInfo.is_hidden ? " (Hidden)" : ""}`;
     return { title, effect: en?.effect || "" };
   }
 
   // ========== Dialog-Logik ==========
   function openPokeDialog(id) {
-    const p = pokeCache.find((x) => x.id === id);
-    if (!p) return;
-    renderPokeDialog(p);
+    const pokemon = pokeCache.find((e) => e.id === id);
+    if (!pokemon) return;
+    renderPokeDialog(pokemon);
   }
 
-  function renderPokeDialog(p) {
-    dlgPoke = p;
+  function renderPokeDialog(pokemon) {
+    dlgPoke = pokemon;
     const dlg = getEl("dialog");
-    dlg.innerHTML = tplDialog(p);
+    dlg.innerHTML = tplDialog(pokemon);
     dlg.classList.remove("d_none");
     setDialogTab("main");
     enableOverlayClose();
@@ -228,55 +200,58 @@ async function fetchLocationsTop5ByName(name) {
 
   function dialogPrev() {
     if (!dlgPoke) return;
-    const i = pokeCache.findIndex((x) => x.id === dlgPoke.id);
-    const p = pokeCache[i > 0 ? i - 1 : 0];
-    if (p) renderPokeDialog(p);
+    const i = pokeCache.findIndex((e) => e.id === dlgPoke.id);
+    const pokemon = pokeCache[i > 0 ? i - 1 : 0];
+    if (pokemon) renderPokeDialog(pokemon);
   }
 
   function dialogNext() {
     if (!dlgPoke) return;
-    const i = pokeCache.findIndex((x) => x.id === dlgPoke.id);
-    const p = pokeCache[i < pokeCache.length - 1 ? i + 1 : i];
-    if (p) renderPokeDialog(p);
+    const i = pokeCache.findIndex((e) => e.id === dlgPoke.id);
+    const pokemon = pokeCache[i < pokeCache.length - 1 ? i + 1 : i];
+    if (pokemon) renderPokeDialog(pokemon);
   }
 
   // ========== Tabs-Logik ==========
   async function setDialogTab(tab) {
     if (!dlgPoke) return;
     updateActiveTab(tab);
-    const c = getEl("dlg_tabcontent");
-    if (!c) return;
 
-    showTabLoading(c);
+    const tabContent = getEl("dlg_tabcontent");
+    if (!tabContent) return;
+
+    showTabLoading(tabContent);
     const wait = delay(500);
 
-    if (tab === "main") {
-      const html = await renderMainAsync(dlgPoke);
-      await wait;
-      c.innerHTML = html;
-      return;
-    }
-
-    if (tab === "stats") {
-      await wait;
-      c.innerHTML = tplStats(dlgPoke);
-      return;
-    }
-
-    if (tab === "abilities") {
-      const html = await renderAbilitiesAsync(dlgPoke);
-      await wait;
-      c.innerHTML = html;
-      return;
-    }
-
-    if (tab === "evo") {
-      const html = await renderDlgEvoAsync(dlgPoke);
-      await wait;
-      c.innerHTML = html;
-      return;
-    }
+    if (tab === "main") return renderMainTab(tabContent, wait);
+    if (tab === "stats") return renderStatsTab(tabContent, wait);
+    if (tab === "abilities") return renderAbilitiesTab(tabContent, wait);
+    if (tab === "evo") return renderEvoTab(tabContent, wait);
   }
+
+  async function renderMainTab(container, wait) {
+    const html = await renderMainAsync(dlgPoke);
+    await wait;
+    container.innerHTML = html;
+  }
+
+  async function renderStatsTab(container, wait) {
+    await wait;
+    container.innerHTML = tplStats(dlgPoke);
+  }
+
+  async function renderAbilitiesTab(container, wait) {
+    const html = await renderAbilitiesAsync(dlgPoke);
+    await wait;
+    container.innerHTML = html;
+  }
+
+  async function renderEvoTab(container, wait) {
+    const html = await renderDlgEvoAsync(dlgPoke);
+    await wait;
+    container.innerHTML = html;
+  }
+
 
   function delay(ms) {
     return new Promise((r) => setTimeout(r, ms));
@@ -284,40 +259,40 @@ async function fetchLocationsTop5ByName(name) {
 
   function updateActiveTab(tab) {
     const btns = document.querySelectorAll(".dexdlg__nav .tab");
-    btns.forEach((b) => {
-      b.classList.remove("is-active");
-      b.setAttribute("aria-selected", "false");
+    btns.forEach((btn) => {
+      btn.classList.remove("is-active");
+      btn.setAttribute("aria-selected", "false");
     });
-    const a = Array.from(btns).find((b) => b.dataset.tab === tab);
-    if (!a) return;
-    a.classList.add("is-active");
-    a.setAttribute("aria-selected", "true");
-    a.focus();
+    const btnActive = Array.from(btns).find((btn) => btn.dataset.tab === tab);
+    if (!btnActive) return;
+    btnActive.classList.add("is-active");
+    btnActive.setAttribute("aria-selected", "true");
+    btnActive.focus();
   }
 
   // ========== Async Render (Main / Abilities / Evo) ==========
-async function renderMainAsync(p) {
-  const sp = await fetchSpeciesByUrl(p.species.url);
-  const defName = getDefaultVarietyName(sp);
+async function renderMainAsync(pokemon) {
+  const speciesData = await fetchSpeciesByUrl(pokemon.species.url);
+  const defName = getDefaultVarietyName(speciesData);
   const locs = await fetchLocationsTop5ByName(defName);
   const locations = locs.length ? locs : ["Unknown"];
-  return tplMainStatic(p, sp, locations);
+  return tplMainStatic(pokemon, speciesData, locations);
 }
 
-  async function renderAbilitiesAsync(p) {
-    const arr = await Promise.all(
-      p.abilities.map(async (a) => {
-        const data = await fetchAbility(a.ability.url);
-        return mapAbilityCard(a, data);
+  async function renderAbilitiesAsync(pokemon) {
+    const abilities = await Promise.all(
+      pokemon.abilities.map(async (abilityInfo) => {
+        const data = await fetchAbility(abilityInfo.ability.url);
+        return mapAbilityCard(abilityInfo, data);
       })
     );
-    return tplAbilitiesCards(arr);
+    return tplAbilitiesCards(abilities);
   }
 
-async function renderDlgEvoAsync(p) {
-  const sp = await fetchSpeciesByUrl(p.species.url);
-  const chain = await fetchEvolutionChain(sp.evolution_chain.url);
-  const names = extractEvoSpecies(chain.chain);
+async function renderDlgEvoAsync(pokemon) {
+  const species = await fetchSpeciesByUrl(pokemon.species.url);
+  const chain = await fetchEvolutionChain(species.evolution_chain.url);
+  const names = fetchEvoSpecies(chain.chain);
   const pokes = await Promise.all(names.map(ensurePokemonInCacheByName));
   return tplEvoChain(pokes);
 }
