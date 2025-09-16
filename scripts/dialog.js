@@ -295,7 +295,7 @@ return tplEvoChain(pokes);
 // ========== Dialog-Overlay Handling ==========
 function enableOverlayClose() {
   const dlg = getEl("dialog");
-  dlg.onclick = onOverlayClick;
+  dlg.onclick = clickToClose;
 }
 
 function disableOverlayClose() {
@@ -303,6 +303,6 @@ function disableOverlayClose() {
   dlg.onclick = null;
 }
 
-function onOverlayClick(e) {
-  if (e.target === e.currentTarget) closePokeDialog();
+function clickToClose(event) {
+  if (event.target === event.currentTarget) closePokeDialog();
 }
