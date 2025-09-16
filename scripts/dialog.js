@@ -1,9 +1,6 @@
-// dialog.js — Clean Code, Templates ausgelagert
-
 (() => {
   let dlgPoke = null;
 
-  // Public API
   window.openPokeDialog = openPokeDialog;
   window.closePokeDialog = closePokeDialog;
   window.dialogPrev = dialogPrev;
@@ -140,9 +137,11 @@
 
   function tplEvoChain(pokes) {
     const sep = /*html*/ `<div class="evo_arrow">↓</div>`;
-    return /*html*/ `<div class="evo_chain">${pokes
+    return /*html*/ `
+      <div class="evo_chain">${pokes
       .map(tplEvoItem)
-      .join(sep)}</div>`;
+      .join(sep)}
+      </div>`;
   }
 
   function tplEvoItem(p) {

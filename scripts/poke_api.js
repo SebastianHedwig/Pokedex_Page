@@ -9,8 +9,17 @@ async function loadPokemonBatch(offset = 0, size = 28) {
   return Promise.all(ids.map(fetchPokemonData));
 }
 
-function cachePokemon(pokeList) {
-  for (const poke of pokeList) pokeCache.push(poke);
+function cachePokemon(list) {
+  const ids = new Set(pokeCache.map(p => p.id));
+  list.forEach(p => { if (!ids.has(p.id)) pokeCache.push(p);ids.add(p.id);});
+  pokeCache.sort((a, b) => a.id - b.id);
+  return pokeCache.length;
+}
+
+function mergeIntoCache(list) {
+  const ids = new Set(pokeCache.map(p => p.id));
+  list.forEach(p => { if (!ids.has(p.id)) pokeCache.push(p);ids.add(p.id);});
+  pokeCache.sort((a, b) => a.id - b.id);
   return pokeCache.length;
 }
 
