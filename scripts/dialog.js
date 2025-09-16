@@ -154,21 +154,26 @@
   }
 
   // ========== Fetch + Format Helpers ==========
-  async function fetchSpeciesById(id) {
-    const r = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
-    return r.json();
-  }
+async function fetchSpeciesByUrl(url) {
+  const r = await fetch(url);
+  return r.json();
+}
+
+function getDefaultVarietyName(species) {
+  const def = species.varieties?.find(v => v.is_default);
+  return def?.pokemon?.name || species.name;
+}
 
   async function fetchEvolutionChain(url) {
     const r = await fetch(url);
     return r.json();
   }
 
-  async function fetchLocationsTop5(id) {
-    const r = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`);
-    const data = await r.json();
-    return data.map((l) => l.location_area.name.replace(/-/g, " ")).slice(0, 5);
-  }
+async function fetchLocationsTop5ByName(name) {
+  const r = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/encounters`);
+  const data = await r.json();
+  return data.map(l => l.location_area.name.replace(/-/g, " ")).slice(0, 5);
+}
 
   async function fetchAbility(url) {
     const r = await fetch(url);
@@ -292,14 +297,13 @@
   }
 
   // ========== Async Render (Main / Abilities / Evo) ==========
-  async function renderMainAsync(p) {
-    const [sp, locs] = await Promise.all([
-      fetchSpeciesById(p.id),
-      fetchLocationsTop5(p.id),
-    ]);
-    const locations = locs.length > 0 ? locs : ["Unknown"];
-    return tplMainStatic(p, sp, locations);
-  }
+async function renderMainAsync(p) {
+  const sp = await fetchSpeciesByUrl(p.species.url);
+  const defName = getDefaultVarietyName(sp);
+  const locs = await fetchLocationsTop5ByName(defName);
+  const locations = locs.length ? locs : ["Unknown"];
+  return tplMainStatic(p, sp, locations);
+}
 
   async function renderAbilitiesAsync(p) {
     const arr = await Promise.all(
@@ -311,13 +315,13 @@
     return tplAbilitiesCards(arr);
   }
 
-  async function renderDlgEvoAsync(p) {
-    const sp = await fetchSpeciesById(p.id);
-    const chain = await fetchEvolutionChain(sp.evolution_chain.url);
-    const names = extractEvoSpecies(chain.chain);
-    const pokes = await Promise.all(names.map(ensurePokemonInCacheByName));
-    return tplEvoChain(pokes);
-  }
+async function renderDlgEvoAsync(p) {
+  const sp = await fetchSpeciesByUrl(p.species.url);
+  const chain = await fetchEvolutionChain(sp.evolution_chain.url);
+  const names = extractEvoSpecies(chain.chain);
+  const pokes = await Promise.all(names.map(ensurePokemonInCacheByName));
+  return tplEvoChain(pokes);
+}
 
 
   // ========== Dialog-Overlay Handling ==========
