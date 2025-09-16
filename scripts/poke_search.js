@@ -72,8 +72,9 @@ async function runApiSearch(q) {
     const merged = unique([...byType, ...byName]);
     const data = await fetchPokemonList(merged);
     mergeIntoCache(data);
-    renderCards(data);
-  } catch { renderCards([]); }
+    await sleep(500); 
+    renderCards(data); 
+  } catch {renderCards([])}
 }
 
 

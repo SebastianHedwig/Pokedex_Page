@@ -1,7 +1,7 @@
 function startOverlay() {
   const overlay = getEl("cover_overlay");
   if (!overlay) return;
-  setTimeout(openCurtain, 3000);
+  setTimeout(openCurtain, 1800);
 }
 
 function openCurtain() {

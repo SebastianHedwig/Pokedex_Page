@@ -52,7 +52,19 @@ function renderCards(list) {
   if (btn) btn.style.display = query.length >= SEARCH_MIN_LENGTH ? "none" : "flex";
 }
 
-function loadPokemon() {
+async function loadPokemon() {
+  showCardsSpinner();
   currentOffset += pageSize;
-  renderCacheBevorLoad(currentOffset, pageSize);
+
+  let data = null;
+  await loadPokemonBatch(currentOffset, pageSize)
+    .then(function (d) {data = d}, function () {data = []});
+
+  if (data && data.length) {cachePokemon(data)}
+  await sleep(500);
+  renderCards(pokeCache);
+}
+
+function sleep(ms) {
+  return new Promise(function (resolve) {setTimeout(resolve, ms)});
 }

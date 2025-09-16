@@ -149,11 +149,22 @@
   filter: brightness(1.2);
 }
 
+.dexdlg__meta {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0.3rem 0.5rem;
+  background-color: rgb(250, 235, 215);
+  border: 0.2rem solid #000;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0 3px rgb(204, 204, 204);
+}
+
 .dexdlg__right {
   width: 90%;
   justify-self: center;
   background-color: rgb(250, 235, 215);
-  border-radius: 16px;
+  border-radius: 1rem;
   border: 0.2rem solid #000;
   box-shadow: inset 0 0 0 6px rgb(204, 204, 204);
   display: flex;
@@ -194,6 +205,10 @@
 
 .dexdlg__nav .tab:hover {
   filter: brightness(1.1);
+}
+
+.tab {
+  cursor: pointer;
 }
 
 .tab-loading {
@@ -360,7 +375,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 7.5rem;
+  width: 8rem;
   padding: 0.3rem 0.5rem;
   background: linear-gradient(145deg, #f2f2f2, #e0e0e0);
   border: 2px solid #bdbdbd;
@@ -372,7 +387,7 @@
 }
 
 .evo_card:hover {
-  transform: translateY(-2px) scale(1.05);
+  transform: scale(1.01);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
   background: linear-gradient(145deg, #e8e8e8, #f6f6f6);
 }
@@ -405,11 +420,6 @@
 .evo_arrow {
   font-size: 1.2rem;
   color: #555;
-}
-
-.evo_card,
-.evo_arrow {
-  will-change: transform, box-shadow;
 }
 
 .location-list {
@@ -497,6 +507,11 @@
   }
   .dexdlg__content {
     min-height: 0;
+  }
+
+  .evo_chain {
+    flex-direction: row;
+    justify-content: center;
   }
 }
 
