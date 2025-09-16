@@ -3,7 +3,7 @@ function getStartOverlay() {
   return /*html*/ `
     <div class="overlay_panel overlay_panel--left"></div>
     <div class="overlay_panel overlay_panel--right"></div>
-    <img src="./assets/img/pokeball_512_spinner_flaticon.png" class="overlay_spinner" alt="Lade Pokeball">`;
+    <img class="overlay_spinner" src="./assets/img/pokeball_512_spinner_flaticon.png" alt="Lade Pokeball">`;
 }
 
 function getHeaderTemplate() {

@@ -105,6 +105,13 @@
       <div class="kv"><span>Fundorte</span><ul class="location-list">${list}</ul></div>`;
   }
 
+  function showTabLoading(container) {
+    container.innerHTML = /*html*/ `
+    <div class="tab-loading">
+      <div class="spinner"></div>
+    </div>`;
+  }
+
   function tplStats(p) {
     return (p.stats || [])
       .map((s) => {
@@ -236,11 +243,39 @@
     const c = getEl("dlg_tabcontent");
     if (!c) return;
 
-    if (tab === "main") return (c.innerHTML = await renderMainAsync(dlgPoke));
-    if (tab === "stats") return (c.innerHTML = tplStats(dlgPoke));
-    if (tab === "abilities")
-      return (c.innerHTML = await renderAbilitiesAsync(dlgPoke));
-    if (tab === "evo") return renderDlgEvoAsync(dlgPoke, c);
+    showTabLoading(c);
+    const wait = delay(1000); // min. 1s Spinner
+
+    if (tab === "main") {
+      const html = await renderMainAsync(dlgPoke);
+      await wait;
+      c.innerHTML = html;
+      return;
+    }
+
+    if (tab === "stats") {
+      await wait;
+      c.innerHTML = tplStats(dlgPoke);
+      return;
+    }
+
+    if (tab === "abilities") {
+      const html = await renderAbilitiesAsync(dlgPoke);
+      await wait;
+      c.innerHTML = html;
+      return;
+    }
+
+    if (tab === "evo") {
+      const html = await renderDlgEvoAsync(dlgPoke); // <— neu
+      await wait;
+      c.innerHTML = html;
+      return;
+    }
+  }
+
+  function delay(ms) {
+    return new Promise((r) => setTimeout(r, ms));
   }
 
   function updateActiveTab(tab) {
@@ -276,14 +311,14 @@
     return tplAbilitiesCards(arr);
   }
 
-  async function renderDlgEvoAsync(p, container) {
-    container.innerHTML = /*html*/ `<div class="placeholder">Loading evolution…</div>`;
+  async function renderDlgEvoAsync(p) {
     const sp = await fetchSpeciesById(p.id);
     const chain = await fetchEvolutionChain(sp.evolution_chain.url);
     const names = extractEvoSpecies(chain.chain);
     const pokes = await Promise.all(names.map(ensurePokemonInCacheByName));
-    container.innerHTML = tplEvoChain(pokes);
+    return tplEvoChain(pokes);
   }
+
 
   // ========== Dialog-Overlay Handling ==========
   function enableOverlayClose() {

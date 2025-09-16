@@ -30,14 +30,16 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  width: 6rem;
   height: 6rem;
-  animation: spin 1s linear infinite;
+  display: block;
+  transform: translate(-50%, -50%);
+  animation: spinOverlayImg 1s linear infinite;
+  will-change: transform;
   transition: opacity 0.5s ease;
-  z-index: 1;
 }
 
-@keyframes spin {
+@keyframes spinOverlayImg {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
   }
