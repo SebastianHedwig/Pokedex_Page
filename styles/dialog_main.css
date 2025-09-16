@@ -32,10 +32,10 @@
 }
 
 .spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid rgba(0, 0, 0, 0.2);
-  border-top-color: #3c4d91;
+  width: 2rem;
+  height: 2rem;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+  border-top-color: rgb(60, 77, 145);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -144,7 +144,7 @@
 
   .dexdlg__left,
   .dexdlg__right {
-    border-radius: 6px;
+    border-radius: 0.375rem;
   }
 
   .dexdlg__nav .tab {
