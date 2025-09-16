@@ -8,6 +8,7 @@ function init() {
   startOverlay();
   renderHeader();
   renderContentSkeleton();
+  initSearch();
   renderFooter();
   startInitialLoad();
 }
@@ -43,8 +44,17 @@ async function renderCacheBevorLoad(offset, size) {
   renderCards(pokeCache);
 }
 
+function mergeIntoCache(list) {
+  const ids = new Set(pokeCache.map(p => p.id));
+  for (const p of list) if (!ids.has(p.id)) pokeCache.push(p);
+}
+
 function renderCards(list) {
+  const query = getEl("pokesearch_input")?.value.trim().toLowerCase() || "";
   getEl("pokemon_cards_container").innerHTML = list.map(getPokemonCardTemplate).join("");
+
+  const btn = getEl("load_btn");
+  if (btn) btn.style.display = query.length >= SEARCH_MIN_LENGTH ? "none" : "flex";
 }
 
 function loadPokemon() {

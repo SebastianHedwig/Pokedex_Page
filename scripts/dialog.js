@@ -244,7 +244,7 @@
     if (!c) return;
 
     showTabLoading(c);
-    const wait = delay(1000); // min. 1s Spinner
+    const wait = delay(500);
 
     if (tab === "main") {
       const html = await renderMainAsync(dlgPoke);
@@ -267,7 +267,7 @@
     }
 
     if (tab === "evo") {
-      const html = await renderDlgEvoAsync(dlgPoke); // <— neu
+      const html = await renderDlgEvoAsync(dlgPoke);
       await wait;
       c.innerHTML = html;
       return;
