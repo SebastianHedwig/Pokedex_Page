@@ -80,8 +80,8 @@ async function runApiSearch(q) {
 
 function showCardsSpinner() {
   const img = "./assets/img/pokeball_512_spinner_flaticon.png";
-  getEl("pokemon_cards_container").innerHTML =
-    `<img class="overlay_spinner" src="${img}" alt="Lade Pokeball">`;
+  getEl("pokemon_cards_container").innerHTML = /*html*/ `
+  <img class="overlay_spinner" src="${img}" alt="Lade Pokeball">`;
 }
 
 async function findNameMatches(q) {

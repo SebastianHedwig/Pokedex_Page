@@ -34,8 +34,8 @@
     return /*html*/ `
       <div class="dexdlg__controls">
         <button class="btn btn--primary" onclick="closePokeDialog()">Close</button>
-        <button class="btn" onclick="dialogPrev()">previous</button>
-        <button class="btn" onclick="dialogNext()">next</button>
+        <button class="btn" onclick="dialogPrev()">Previous</button>
+        <button class="btn" onclick="dialogNext()">Next</button>
       </div>`;
   }
 
@@ -80,7 +80,7 @@
   // ========== Tab-Inhalte (HTML) ==========
   function tplMainStatic(p, sp, locs) {
     const types = p.types.map((x) => x.type.name).join(", ");
-    const list = locs.map((l) => `<li>${l}</li>`).join("");
+    const list = locs.map((l) => /*html*/ `<li>${l}</li>`).join("");
     return /*html*/ `
       <div class="kv"><span>ID</span><span>#${p.id}</span></div>
       <div class="kv"><span>Type(s)</span><span>${types}</span></div>
@@ -99,7 +99,7 @@
       <div class="kv"><span>Base Happiness</span><span>${
         sp.base_happiness
       }</span></div>
-      <div class="kv"><span>Fundorte</span><ul class="location-list">${list}</ul></div>`;
+      <div class="kv"><span>Locations</span><ul class="location-list">${list}</ul></div>`;
   }
 
   function showTabLoading(container) {

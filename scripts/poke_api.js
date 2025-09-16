@@ -24,7 +24,7 @@ function mergeIntoCache(list) {
 }
 
 function formatName(name) {
-  if (!name) return "Unbekannt";
+  if (!name) return "Unknown";
   return name[0].toUpperCase() + name.slice(1);
 }
 
@@ -32,14 +32,14 @@ function getPokemonImage(poke) {
   const url = poke.sprites?.other?.["official-artwork"]?.front_default;
   if (!url) return "";
 
-  const mainType = poke.types?.[0]?.type?.name || "unknown";
+  const mainType = poke.types?.[0]?.type?.name || "Unknown";
   return /*html*/ `
     <img class="poke_img ${mainType}" src="${url}" alt="Picture of ${poke.name}">`;
 }
 
 function getTypeIcons(poke) {
   const types = poke.types;
-  if (!types.length) return "Unbekannt";
+  if (!types.length) return "Unknown";
 
   return types
     .map(t => getTypeIconTemplate(t.type.name))

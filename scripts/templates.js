@@ -20,7 +20,7 @@ function getPageContentSkeletonTemplate() {
         <img id="pokesearch_title_img" src="./assets/img/Pokesearch_Logo_textstudio.png" alt="Pokesearch Schriftzug">
         <form id="pokesearch_box" onsubmit="onSearchSubmit(event)">
           <label class="visually-hidden" for="pokesearch_input">Pokémon-Suche</label>
-          <input id="pokesearch_input" type="search" placeholder="Suche Dein(e) Pokemon" oninput="onSearchInput(event)">
+          <input id="pokesearch_input" type="search" placeholder="search your Pokemon(s)" oninput="onSearchInput(event)">
           <button class="search_btn" type="submit" aria-label="Pokémon suchen">Search API</button>
         </form>
       </div>
@@ -60,7 +60,7 @@ function getTypeIconTemplate(typeName) {
 
 function getLoadPokeBtnTemplate() {
   return /*html*/ `
-    <button id="load_btn" onclick="loadPokemon()">Mehr laden</button>`;
+    <button id="load_btn" onclick="loadPokemon()">Load Further</button>`;
 }
 
 function getFooterTemplate() {
