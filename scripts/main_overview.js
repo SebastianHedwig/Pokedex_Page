@@ -1,3 +1,4 @@
+// ========== API-Loader ==========
 async function fetchPokemonData(pokeNameOrId) {
   const url = `https://pokeapi.co/api/v2/pokemon/${pokeNameOrId}`;
   const pokeList = await fetch(url);
@@ -5,24 +6,32 @@ async function fetchPokemonData(pokeNameOrId) {
 }
 
 async function loadPokemonBatch(offset = 0, size = 28) {
-  const ids = Array.from({length: size}, (_, i) => offset + i + 1);
+  const ids = Array.from({ length: size }, function(_, i) { return offset + i + 1; });
   return Promise.all(ids.map(fetchPokemonData));
 }
 
+// ========== Cache-Operations ==========
 function cachePokemon(list) {
-  const ids = new Set(pokeCache.map(pokemon => pokemon.id));
-  list.forEach(pokemon => { if (!ids.has(pokemon.id)) pokeCache.push(pokemon);ids.add(pokemon.id);});
-  pokeCache.sort((a, b) => a.id - b.id);
+  const ids = new Set(pokeCache.map(function(pokemon) { return pokemon.id; }));
+  list.forEach(function(pokemon) {
+    if (!ids.has(pokemon.id)) pokeCache.push(pokemon);
+    ids.add(pokemon.id);
+  });
+  pokeCache.sort(function(a, b) { return a.id - b.id; });
   return pokeCache.length;
 }
 
 function mergeIntoCache(list) {
-  const ids = new Set(pokeCache.map(pokemon => pokemon.id));
-  list.forEach(pokemon => { if (!ids.has(pokemon.id)) pokeCache.push(pokemon);ids.add(pokemon.id);});
-  pokeCache.sort((a, b) => a.id - b.id);
+  const ids = new Set(pokeCache.map(function(pokemon) { return pokemon.id; }));
+  list.forEach(function(pokemon) {
+    if (!ids.has(pokemon.id)) pokeCache.push(pokemon);
+    ids.add(pokemon.id);
+  });
+  pokeCache.sort(function(a, b) { return a.id - b.id; });
   return pokeCache.length;
 }
 
+// ========== Format- and Template-Helper ==========
 function formatName(name) {
   if (!name) return "Unknown";
   return name[0].toUpperCase() + name.slice(1);
@@ -41,5 +50,5 @@ function getTypeIcons(poke) {
   const types = poke.types;
   if (!types.length) return "Unknown";
 
-  return types.map(t => getTypeIconTemplate(t.type.name)).join(" ");
+  return types.map(function(t) { return getTypeIconTemplate(t.type.name); }).join(" ");
 }

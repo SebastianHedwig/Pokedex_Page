@@ -17,7 +17,7 @@ const TYPE_MAP = {
   "psycho":"psychic",
   "käfer":"bug",
   "kaefer":"bug",
-  "gestein":"rock",
+  "stein":"rock",
   "geist":"ghost",
   "unlicht":"dark",
   "drache":"dragon",
