@@ -60,12 +60,13 @@
   }
   .dexdlg__right {
     width: 100%;
-    min-height: 28.125rem;
+    min-height: 0;
     box-shadow: inset 0 0 0 0.2rem rgb(204, 204, 204);
   }
   .dexdlg__content {
     min-height: 0;
   }
+  
   .bar {
     margin: 1rem 0;
   }
@@ -115,7 +116,7 @@
   }
 }
 
-@media (max-width:480px) {
+@media (max-width: 480px) {
   .evo_chain {
     flex-direction: column;
   }
@@ -124,7 +125,6 @@
     rotate: unset;
   }
 }
-
 
 @media (max-width: 400px) {
   .btn {
@@ -168,5 +168,74 @@
   }
   .evo_label {
     font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  html {
+    font-size: 20px;
+  }
+  .dexdlg {
+    width: min(80rem, 90vw);
+    height: min(48rem, 86vh);
+  }
+  .dexdlg__controls .btn {
+    height: 3rem;
+    font-size: 1.05rem;
+  }
+  .dexdlg__content {
+    padding: 1.1rem 1.5rem;
+  }
+  .bar__track {
+    height: 1.9rem;
+  }
+  .bar__track i {
+    line-height: 1.9rem;
+  }
+  .evo_card {
+    width: 9rem;
+  }
+}
+
+@media (min-width: 5120px) {
+  .dexdlg__nav .tab {
+    min-width: 9rem;
+    min-height: 2.5rem;
+    font-size: larger;
+  }
+
+  html {
+    font-size: 24px;
+  }
+  .dexdlg {
+    width: min(110rem, 80vw);
+    height: min(64rem, 86vh);
+  }
+  .dexdlg__controls .btn {
+    height: 3.2rem;
+    font-size: 1.1rem;
+  }
+  .evo_card {
+    width: 11rem;
+  }
+}
+
+@media (min-width: 6400px) {
+  html {
+    font-size: 26px;
+  }
+  .dexdlg {
+    width: min(128rem, 78vw);
+    height: min(72rem, 86vh);
+  }
+}
+
+@media (min-width: 7680px) {
+  html {
+    font-size: 30px;
+  }
+  .dexdlg {
+    width: min(150rem, 74vw);
+    height: min(84rem, 86vh);
   }
 }
