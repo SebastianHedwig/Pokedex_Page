@@ -24,6 +24,7 @@
   left: 0;
   transform: translateX(0%);
 }
+
 .overlay_panel--right {
   right: 0;
   transform: translateX(0%);
@@ -51,9 +52,11 @@
 .overlay--curtain-open .overlay_panel--left {
   transform: translateX(-100%);
 }
+
 .overlay--curtain-open .overlay_panel--right {
   transform: translateX(100%);
 }
+
 .overlay--curtain-open .overlay_spinner {
   opacity: 0;
 }

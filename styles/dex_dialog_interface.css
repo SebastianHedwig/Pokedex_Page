@@ -1,5 +1,4 @@
 /* Dex-Main-Dialog-Interface */
-
 .dexdlg {
   width: min(61.25rem, 94vw);
   height: min(40rem, 86vh);
@@ -101,7 +100,6 @@
   border-radius: 0.75rem;
   display: grid;
   place-items: center;
-  overflow: hidden;
   background: #1e1e1e;
   box-shadow: inset 0 0 0 0.188rem rgb(0, 0, 0), inset 0 0 0 0.563rem rgb(204, 204, 204),
     inset 0 0 1.125rem rgba(0, 0, 0, 0.35);
