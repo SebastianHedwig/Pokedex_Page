@@ -87,16 +87,14 @@ function filterPokemonLocal(query) {
 
 async function runApiSearch(query) {
   showCardsSpinner();
-  try {
-    const byName = await findNameMatches(query);
-    const typeKey = resolveType(query);
-    const byType = typeKey ? await getTypePokemon(typeKey) : [];
-    const merged = removeDuplicates([...byType, ...byName]);
-    const data = await fetchPokemonList(merged);
-    mergeIntoCache(data);
-    await sleep(500); 
-    renderCards(data); 
-  } catch {renderCards([])}
+  const byName = await findNameMatches(query);
+  const typeKey = resolveType(query);
+  const byType = typeKey ? await getTypePokemon(typeKey) : [];
+  const merged = removeDuplicates([...byType, ...byName]);
+  const data = await fetchPokemonList(merged);
+  mergeIntoCache(data);
+  await sleep(500); 
+  renderCards(data); 
 }
 
 
