@@ -1,8 +1,8 @@
 // Main-Templates:
 function getStartOverlay() {
   return /*html*/ `
-    <div class="overlay_panel overlay_panel--left"></div>
-    <div class="overlay_panel overlay_panel--right"></div>
+    <div class="overlay_panel overlay_panel_left"></div>
+    <div class="overlay_panel overlay_panel_right"></div>
     <img class="overlay_spinner" src="./assets/img/pokeball_512_spinner_flaticon.png" alt="Lade Pokeball">`;
 }
 
@@ -19,7 +19,7 @@ function getPageContentSkeletonTemplate() {
       <div id="pokesearch_container">
         <img id="pokesearch_title_img" src="./assets/img/Pokesearch_Logo_textstudio.png" alt="Pokesearch Schriftzug">
         <form id="pokesearch_box" onsubmit="onSearchSubmit(event)">
-          <label class="visually-hidden" for="pokesearch_input">Pokémon-Suche</label>
+          <label class="visually_hidden" for="pokesearch_input">Pokémon-Suche</label>
           <input id="pokesearch_input" type="search" placeholder="search your Pokemon(s)" oninput="onSearchInput(event)">
           <button class="search_btn" type="submit" aria-label="Pokémon suchen">Search API</button>
         </form>

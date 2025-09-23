@@ -49,7 +49,7 @@
 }
 
 /* Dex-Left-Dialog-Interface: */
-.dexdlg__left {
+.dexdlg_left {
   background: linear-gradient(180deg, rgb(211, 47, 47), rgb(183, 28, 28));
   border: 0.2rem solid rgb(0, 0, 0);
   border-radius: 1rem;
@@ -62,8 +62,8 @@
   position: relative;
 }
 
-.dexdlg .dexdlg__left::before,
-.dexdlg .dexdlg__left::after {
+.dexdlg .dexdlg_left::before,
+.dexdlg .dexdlg_left::after {
   content: "";
   position: absolute;
   top: 0.625rem;
@@ -88,7 +88,7 @@
   pointer-events: none;
 }
 
-.dexdlg .dexdlg__left::after {
+.dexdlg .dexdlg_left::after {
   top: 1.75rem;
   left: 2.125rem;
   width: 0.5rem;
@@ -96,7 +96,7 @@
   opacity: 0.85;
 }
 
-.dexdlg__screen {
+.dexdlg_screen {
   border-radius: 0.75rem;
   display: grid;
   place-items: center;
@@ -106,7 +106,7 @@
   position: relative;
 }
 
-.dexdlg__screen::after {
+.dexdlg_screen::after {
   content: "";
   position: absolute;
   top: -20%;
@@ -128,27 +128,27 @@
   transform: translate3d(0, 0, 0);
 }
 
-.dexdlg__screen img {
+.dexdlg_screen img {
   max-width: 95%;
   height: 95%;
   filter: drop-shadow(0 0.75rem 1.375rem rgba(0, 0, 0, 0.32));
 }
 
-.dexdlg__controls {
+.dexdlg_controls {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
   gap: 0.6rem;
   align-items: center;
 }
 
-.dexdlg__controls .btn {
+.dexdlg_controls .btn {
   height: 2.8rem;
   font-size: 1rem;
   width: 100%;
   justify-self: stretch;
 }
 
-.dexdlg__controls .btn--primary {
+.dexdlg_controls .btn_primary {
   width: auto;
   padding: 0.5rem 1rem;
   justify-self: center;
@@ -184,17 +184,17 @@
   filter: brightness(1.1);
 }
 
-.btn--primary {
+.btn_primary {
   background: linear-gradient(145deg, rgb(60, 77, 145), rgb(42, 51, 104));
   color: rgb(255, 255, 255);
   border-color: rgb(30, 36, 80);
 }
 
-.btn--primary:hover {
+.btn_primary:hover {
   filter: brightness(1.2);
 }
 
-.dexdlg__meta {
+.dexdlg_meta {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -206,7 +206,7 @@
 }
 
 /* Dex-Right-Dialog-Interface */
-.dexdlg__right {
+.dexdlg_right {
   width: 90%;
   justify-self: center;
   background-color: rgb(250, 235, 215);
@@ -219,7 +219,7 @@
   min-height: 0;
 }
 
-.dexdlg__nav {
+.dexdlg_nav {
   display: flex;
   justify-content: center;
   gap: 0.6rem;
@@ -230,7 +230,7 @@
   flex: 0 0 auto;
 }
 
-.dexdlg__nav .tab {
+.dexdlg_nav .tab {
   min-width: 5.625rem;
   text-align: center;
   padding: 0.5rem 0.75rem;
@@ -242,14 +242,14 @@
   transition: 0.2s ease;
 }
 
-.dexdlg__nav .tab.is-active {
+.dexdlg_nav .tab.is_active {
   background: linear-gradient(145deg, rgb(60, 77, 145), rgb(42, 51, 104));
   box-shadow: 0 0 0.313rem 0.125rem rgba(0, 0, 0, 0.5) inset;
   color: rgb(255, 255, 255);
   border-color: rgb(30, 36, 80);
 }
 
-.dexdlg__nav .tab:hover {
+.dexdlg_nav .tab:hover {
   filter: brightness(1.1);
 }
 
@@ -257,7 +257,7 @@
   cursor: pointer;
 }
 
-.dexdlg__content {
+.dexdlg_content {
   padding: 1rem;
   padding-left: 1.5rem;
   overflow: auto;

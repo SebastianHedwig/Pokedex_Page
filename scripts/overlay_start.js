@@ -7,7 +7,7 @@ function startOverlay() {
 function openCurtain() {
   const overlaySidePanels = getEl("cover_overlay");
   if (!overlaySidePanels) return;
-  overlaySidePanels.classList.add("overlay--curtain-open");
+  overlaySidePanels.classList.add("overlay_curtain_open");
 
   const transitionMs = 1200;
   setTimeout(removeOverlay, transitionMs + 100);

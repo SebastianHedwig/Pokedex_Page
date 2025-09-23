@@ -20,12 +20,12 @@
   will-change: transform;
 }
 
-.overlay_panel--left {
+.overlay_panel_left {
   left: 0;
   transform: translateX(0%);
 }
 
-.overlay_panel--right {
+.overlay_panel_right {
   right: 0;
   transform: translateX(0%);
 }
@@ -49,14 +49,14 @@
   }
 }
 
-.overlay--curtain-open .overlay_panel--left {
+.overlay_curtain_open .overlay_panel_left {
   transform: translateX(-100%);
 }
 
-.overlay--curtain-open .overlay_panel--right {
+.overlay_curtain_open .overlay_panel_right {
   transform: translateX(100%);
 }
 
-.overlay--curtain-open .overlay_spinner {
+.overlay_curtain-open .overlay_spinner {
   opacity: 0;
 }

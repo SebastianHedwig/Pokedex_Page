@@ -10,7 +10,7 @@ function tplDialog(pokemon) {
 function tplLeft(pokemon) {
   const type = (pokemon.types && pokemon.types[0] && pokemon.types[0].type && pokemon.types[0].type.name) || "unknown";
   return /*html*/ `
-    <div class="dexdlg__left">
+    <div class="dexdlg_left">
       ${tplScreen(type, getPokemonImage(pokemon))}
       ${tplControls()}
       ${tplMeta(formatName(pokemon.name), type)}
@@ -18,13 +18,13 @@ function tplLeft(pokemon) {
 }
 
 function tplScreen(type, imgHtml) {
-  return /*html*/ `<div class="dexdlg__screen ${type}" id="dlg_screen">${imgHtml}</div>`;
+  return /*html*/ `<div class="dexdlg_screen ${type}" id="dlg_screen">${imgHtml}</div>`;
 }
 
 function tplControls() {
   return /*html*/ `
-    <div class="dexdlg__controls">
-      <button class="btn btn--primary" onclick="closePokeDialog()">Close</button>
+    <div class="dexdlg_controls">
+      <button class="btn btn_primary" onclick="closePokeDialog()">Close</button>
       <button class="btn" onclick="dialogPrev()">Previous</button>
       <button class="btn" onclick="dialogNext()">Next</button>
     </div>`;
@@ -33,7 +33,7 @@ function tplControls() {
 function tplMeta(name, type) {
   const cls = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
   return /*html*/ `
-    <div class="dexdlg__meta">
+    <div class="dexdlg_meta">
       <div><strong>Name:</strong> ${name}</div>
       <div><strong>Class:</strong> ${cls}</div>
     </div>`;
@@ -41,9 +41,9 @@ function tplMeta(name, type) {
 
 function tplRight(active) {
   return /*html*/ `
-    <div class="dexdlg__right">
+    <div class="dexdlg_right">
       ${tplNav(active)}
-      <div id="dlg_tabcontent" class="dexdlg__content"></div>
+      <div id="dlg_tabcontent" class="dexdlg_content"></div>
     </div>`;
 }
 
@@ -52,11 +52,11 @@ function tplNav(active) {
   const labels = { main: "Main", stats: "Stats", abilities: "Abilities", evo: "Evo-Chain" };
   const buttons = items.map(function (t) {
     return /*html*/ `
-      <button class="tab ${active === t ? "is-active" : ""}"
+      <button class="tab ${active === t ? "is_active" : ""}"
               data-tab="${t}" role="tab" aria-selected="${active === t}"
               onclick="setDialogTab('${t}')">${labels[t]}</button>`;
   }).join("");
-  return /*html*/ `<nav class="dexdlg__nav" role="tablist">${buttons}</nav>`;
+  return /*html*/ `<nav class="dexdlg_nav" role="tablist">${buttons}</nav>`;
 }
 
 // ========== Tab-Inhalte ==========
@@ -71,12 +71,12 @@ function tplMainStatic(pokemon, species, locations) {
     <div class="kv"><span>Base Experience</span><span>${pokemon.base_experience}</span></div>
     <div class="kv"><span>Capture Rate</span><span>${species.capture_rate} %</span></div>
     <div class="kv"><span>Base Happiness</span><span>${species.base_happiness}</span></div>
-    <div class="kv"><span>Locations</span><ul class="location-list">${list}</ul></div>`;
+    <div class="kv"><span>Locations</span><ul class="location_list">${list}</ul></div>`;
 }
 
 function showTabLoading(container) {
   container.innerHTML = /*html*/ `
-    <div class="tab-loading">
+    <div class="tab_loading">
       <div class="spinner"></div>
     </div>`;
 }
@@ -87,8 +87,8 @@ function tplStats(pokemon) {
     const barWidthUI = Math.min(value, 150) / 1.5;
     return /*html*/ `
       <div class="bar">
-        <span class="bar__label">${s.stat.name}</span>
-        <div class="bar__track"><i style="width:${barWidthUI}%">${value}</i></div>
+        <span class="bar_label">${s.stat.name}</span>
+        <div class="bar_track"><i style="width:${barWidthUI}%">${value}</i></div>
       </div>`;
   }).join("");
 }
@@ -96,7 +96,7 @@ function tplStats(pokemon) {
 function tplAbilitiesCards(cards) {
   return cards.map(function (card) {
     return /*html*/ `
-      <div class="ability-card">
+      <div class="ability_card">
         <h4>${card.title}</h4>
         <p>${card.effect}</p>
       </div>`;
