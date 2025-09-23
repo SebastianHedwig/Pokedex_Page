@@ -23,7 +23,7 @@
   position: static;
 }
 
-.tab-loading {
+.tab_loading {
   display: flex;
   justify-content: center;
   align-items: center;
