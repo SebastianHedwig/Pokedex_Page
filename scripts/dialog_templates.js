@@ -25,8 +25,8 @@ function tplControls() {
   return /*html*/ `
     <div class="dexdlg_controls">
       <button class="btn btn_primary" onclick="closePokeDialog()">Close</button>
-      <button class="btn" onclick="dialogPrev()">Previous</button>
-      <button class="btn" onclick="dialogNext()">Next</button>
+      <button id="btn_prev" class="btn" onclick="dialogPrev()">Previous</button>
+      <button id="btn_next" class="btn" onclick="dialogNext()">Next</button>
     </div>`;
 }
 

@@ -15,6 +15,7 @@ function renderPokeDialog(pokemon) {
   dlg.classList.remove("d_none");
   setDialogTab("main");
   enableOverlayClose();
+  syncDialogNavButtons();
 }
 
 function closePokeDialog() {
@@ -28,15 +29,27 @@ function closePokeDialog() {
 function dialogPrev() {
   if (!currentDialogPokemon) return;
   const index = pokeCache.findIndex(function (e) { return e.id === currentDialogPokemon.id; });
-  const pokemon = pokeCache[index > 0 ? index - 1 : 0];
-  if (pokemon) renderPokeDialog(pokemon);
+  if (index <= 0) return;
+  renderPokeDialog(pokeCache[index - 1]);
+  syncDialogNavButtons();
 }
 
 function dialogNext() {
   if (!currentDialogPokemon) return;
   const index = pokeCache.findIndex(function (e) { return e.id === currentDialogPokemon.id; });
-  const pokemon = pokeCache[index < pokeCache.length - 1 ? index + 1 : index];
-  if (pokemon) renderPokeDialog(pokemon);
+  if (index >= pokeCache.length - 1) return;
+  renderPokeDialog(pokeCache[index + 1]);
+  syncDialogNavButtons();
+}
+
+function syncDialogNavButtons() {
+  const prevBtn = document.getElementById("btn_prev");
+  const nextBtn = document.getElementById("btn_next");
+  if (!currentDialogPokemon || !prevBtn || !nextBtn) return;
+
+  const index = pokeCache.findIndex(function (e) { return e.id === currentDialogPokemon.id; });
+  prevBtn.disabled = index <= 0;
+  nextBtn.disabled = index >= (pokeCache.length - 1);
 }
 
 // ========== Tabs-Steuerung ==========

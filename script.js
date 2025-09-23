@@ -53,6 +53,8 @@ function renderCards(list) {
 }
 
 async function loadPokemon() {
+  const loadBtn = document.getElementById("load_btn");
+  loadBtn.classList.add("d_none");
   showCardsSpinner();
   currentOffset += pageSize;
 
@@ -63,6 +65,7 @@ async function loadPokemon() {
   if (data && data.length) {cachePokemon(data)}
   await sleep(500);
   renderCards(pokeCache);
+  loadBtn.classList.remove("d_none");
 }
 
 function sleep(ms) {
