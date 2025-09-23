@@ -1,4 +1,3 @@
-// Main-Templates:
 function getStartOverlay() {
   return /*html*/ `
     <div class="overlay_panel overlay_panel_left"></div>

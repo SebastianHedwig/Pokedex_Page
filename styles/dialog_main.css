@@ -46,6 +46,7 @@
   }
 }
 
+/* Media-Queries: */
 @media (max-width: 1000px) {
   .dexdlg {
     grid-template-columns: 1fr;

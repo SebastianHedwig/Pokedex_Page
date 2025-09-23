@@ -97,7 +97,6 @@ async function runApiSearch(query) {
   renderCards(data); 
 }
 
-
 function showCardsSpinner() {
   const img = "./assets/img/pokeball_512_spinner_flaticon.png";
   getEl("pokemon_cards_container").innerHTML = /*html*/ `

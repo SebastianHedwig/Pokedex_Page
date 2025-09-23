@@ -59,7 +59,7 @@ function tplNav(active) {
   return /*html*/ `<nav class="dexdlg_nav" role="tablist">${buttons}</nav>`;
 }
 
-// ========== Tab-Inhalte ==========
+// ========== Tab-Content ==========
 function tplMainStatic(pokemon, species, locations) {
   const types = (pokemon.types || []).map(function (x) { return x.type.name; }).join(", ");
   const list = locations.map(function (location) { return /*html*/ `<li>${location}</li>`; }).join("");
