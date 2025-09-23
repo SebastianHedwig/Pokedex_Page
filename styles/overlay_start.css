@@ -57,6 +57,6 @@
   transform: translateX(100%);
 }
 
-.overlay_curtain-open .overlay_spinner {
+.overlay_curtain_open .overlay_spinner {
   opacity: 0;
 }
