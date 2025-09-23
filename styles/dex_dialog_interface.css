@@ -164,7 +164,7 @@
   box-shadow: 0 0 0.313rem 0.125rem rgba(0, 0, 0, 0.5) inset;
   transition: 0.2s ease;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .btn::after {
