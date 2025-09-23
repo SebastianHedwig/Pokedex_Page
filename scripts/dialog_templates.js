@@ -49,19 +49,19 @@ function tplRight(active) {
 
 function tplNav(active) {
   const items = ["main", "stats", "abilities", "evo"];
-  const labels = { main: "Main", stats: "Stats", abilities: "Abilities", evo: "Evo-Chain" };
-  const buttons = items.map(function (t) {
+  const labels = {main: "Main", stats: "Stats", abilities: "Abilities", evo: "Evo-Chain"};
+  const buttons = items.map(function(tab) {
     return /*html*/ `
-      <button class="tab ${active === t ? "is_active" : ""}"
-              data-tab="${t}" role="tab" aria-selected="${active === t}"
-              onclick="setDialogTab('${t}')">${labels[t]}</button>`;
+      <button class="tab ${active === tab ? "is_active" : ""}"
+              data-tab="${tab}" role="tab" aria-selected="${active === tab}"
+              onclick="setDialogTab('${tab}')">${labels[tab]}</button>`;
   }).join("");
   return /*html*/ `<nav class="dexdlg_nav" role="tablist">${buttons}</nav>`;
 }
 
 // ========== Tab-Content ==========
 function tplMainStatic(pokemon, species, locations) {
-  const types = (pokemon.types ?? []).map(function (x) { return x.type.name; }).join(", ");
+  const types = (pokemon.types ?? []).map(function(x) { return x.type.name; }).join(", ");
   const list = locations.map(function (location) { return /*html*/ `<li>${location}</li>`; }).join("");
   return /*html*/ `
     <div class="kv"><span>ID</span><span>#${pokemon.id}</span></div>
