@@ -117,7 +117,7 @@ async function renderMainAsync(pokemon) {
 }
 
 async function renderAbilitiesAsync(pokemon) {
-  const promises = (pokemon.abilities || []).map(function (abilityInfo) {
+  const promises = (pokemon.abilities ?? []).map(function (abilityInfo) {
     return fetchAbility(abilityInfo.ability.url).then(function (data) {
       return mapAbilityCard(abilityInfo, data);
     });

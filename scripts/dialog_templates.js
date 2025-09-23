@@ -61,7 +61,7 @@ function tplNav(active) {
 
 // ========== Tab-Content ==========
 function tplMainStatic(pokemon, species, locations) {
-  const types = (pokemon.types || []).map(function (x) { return x.type.name; }).join(", ");
+  const types = (pokemon.types ?? []).map(function (x) { return x.type.name; }).join(", ");
   const list = locations.map(function (location) { return /*html*/ `<li>${location}</li>`; }).join("");
   return /*html*/ `
     <div class="kv"><span>ID</span><span>#${pokemon.id}</span></div>
@@ -82,7 +82,7 @@ function showTabLoading(container) {
 }
 
 function tplStats(pokemon) {
-  return (pokemon.stats || []).map(function (s) {
+  return (pokemon.stats ?? []).map(function (s) {
     const value = s.base_stat;
     const barWidthUI = Math.min(value, 150) / 1.5;
     return /*html*/ `
