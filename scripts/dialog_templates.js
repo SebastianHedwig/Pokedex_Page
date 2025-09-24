@@ -86,7 +86,6 @@ function tplLocationList(items) {
     <ul class="location_list">${items}</ul>`;
 }
 
-
 function showTabLoading(container) {
   container.innerHTML = /*html*/ `
     <div class="tab_loading">
@@ -126,7 +125,6 @@ function tplEvoChain(pokeList) {
   return /*html*/ `
     <div class="evo_chain">${renderEvoItemsWithSeparator(pokeList)}</div>`;
 }
-
 
 function tplEvoItem(pokemon) {
   return /*html*/ `

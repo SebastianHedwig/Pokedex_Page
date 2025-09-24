@@ -28,15 +28,6 @@ function getPageContentSkeletonTemplate() {
     </div>`;
 }
 
-function getPokemonCardTemplate(pokemon) {
-  const id = pokemon.id;
-  const name = formatName(pokemon.name);
-  const img = getPokemonImage(pokemon);
-  const types = getTypeIcons(pokemon);
-
-  return buildPokemonCardTemplate(id, name, img, types);
-}
-
 function buildPokemonCardTemplate(id, name, img, types) {
   return /*html*/ `
     <article class="poke_card" onclick="openPokeDialog(${id})">

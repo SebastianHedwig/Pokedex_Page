@@ -42,7 +42,7 @@ async function ensurePokemonInCacheByName(name) {
   return pokemon;
 }
 
-// ========== Format- and Template-Helper ==========
+// ========== Overview Card-Builder ==========
 function formatName(name) {
   if (!name) return "Unknown";
   return name[0].toUpperCase() + name.slice(1);
@@ -62,4 +62,13 @@ function getTypeIcons(poke) {
   if (!types.length) return "Unknown";
 
   return types.map(function(t) { return getTypeIconTemplate(t.type.name); }).join(" ");
+}
+
+function getPokemonCardTemplate(pokemon) {
+  const id = pokemon.id;
+  const name = formatName(pokemon.name);
+  const img = getPokemonImage(pokemon);
+  const types = getTypeIcons(pokemon);
+
+  return buildPokemonCardTemplate(id, name, img, types);
 }
