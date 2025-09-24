@@ -53,7 +53,9 @@ function getPokemonCardsContainerTemplate() {
 
 function getTypeIconTemplate(typeName) {
   return /*html*/ `
-    <img class="type_icon" src="./assets/icons/poke_types/${typeName}.png" alt="Pokemon type icon for ${typeName}."
+    <img class="type_icon"
+         src="./assets/icons/poke_types/${typeName}.png"
+         alt="Pokemon type icon for ${typeName}."
          title="${typeName[0].toUpperCase() + typeName.slice(1)}">`;
 }
 

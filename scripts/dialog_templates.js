@@ -8,12 +8,11 @@ function tplDialog(pokemon) {
 }
 
 function tplLeft(pokemon) {
-  const type = (pokemon.types && pokemon.types[0] && pokemon.types[0].type && pokemon.types[0].type.name) || "unknown";
   return /*html*/ `
     <div class="dexdlg_left">
-      ${tplScreen(type, getPokemonImage(pokemon))}
+      ${tplScreen(getPrimaryType(pokemon), getPokemonImage(pokemon))}
       ${tplControls()}
-      ${tplMeta(formatName(pokemon.name), type)}
+      ${tplMeta(formatName(pokemon.name), getPrimaryType(pokemon))}
     </div>`;
 }
 
@@ -31,11 +30,10 @@ function tplControls() {
 }
 
 function tplMeta(name, type) {
-  const cls = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
   return /*html*/ `
     <div class="dexdlg_meta">
       <div><strong>Name:</strong> ${name}</div>
-      <div><strong>Class:</strong> ${cls}</div>
+      <div><strong>Class:</strong> ${formatTypeLabel(type)}</div>
     </div>`;
 }
 
@@ -47,32 +45,47 @@ function tplRight(active) {
     </div>`;
 }
 
+function navButtonsHTML(active) {
+  return NAV_TABS.map(tab => /*html*/ `
+    <button type="button"
+            class="tab
+            ${active === tab.id ? "is_active" : ""}"
+            data-tab="${tab.id}" role="tab"
+            aria-selected="${active === tab.id}"
+            onclick="setDialogTab('${tab.id}')">
+        ${tab.label}
+    </button>`
+  ).join("");
+}
+
 function tplNav(active) {
-  const items = ["main", "stats", "abilities", "evo"];
-  const labels = {main: "Main", stats: "Stats", abilities: "Abilities", evo: "Evo-Chain"};
-  const buttons = items.map(function(tab) {
-    return /*html*/ `
-      <button class="tab ${active === tab ? "is_active" : ""}"
-              data-tab="${tab}" role="tab" aria-selected="${active === tab}"
-              onclick="setDialogTab('${tab}')">${labels[tab]}</button>`;
-  }).join("");
-  return /*html*/ `<nav class="dexdlg_nav" role="tablist">${buttons}</nav>`;
+  return /*html*/ `
+    <nav class="dexdlg_nav" role="tablist">${navButtonsHTML(active)}</nav>`;
 }
 
 // ========== Tab-Content ==========
 function tplMainStatic(pokemon, species, locations) {
-  const types = (pokemon.types ?? []).map(function(x) { return x.type.name; }).join(", ");
-  const list = locations.map(function (location) { return /*html*/ `<li>${location}</li>`; }).join("");
   return /*html*/ `
-    <div class="kv"><span>ID</span><span>#${pokemon.id}</span></div>
-    <div class="kv"><span>Type(s)</span><span>${types}</span></div>
-    <div class="kv"><span>Height</span><span>${(pokemon.height / 10).toFixed(1)} m</span></div>
-    <div class="kv"><span>Weight</span><span>${(pokemon.weight / 10).toFixed(1)} kg</span></div>
-    <div class="kv"><span>Base Experience</span><span>${pokemon.base_experience}</span></div>
-    <div class="kv"><span>Capture Rate</span><span>${species.capture_rate} %</span></div>
-    <div class="kv"><span>Base Happiness</span><span>${species.base_happiness}</span></div>
-    <div class="kv"><span>Locations</span><ul class="location_list">${list}</ul></div>`;
+    <div class="kv"><span>ID</span><span>#${pokemon?.id ?? ""}</span></div>
+    <div class="kv"><span>Type(s)</span><span>${getTypesLabel(pokemon)}</span></div>
+    <div class="kv"><span>Height</span><span>${formatHeightLabel(pokemon)}</span></div>
+    <div class="kv"><span>Weight</span><span>${formatWeightLabel(pokemon)}</span></div>
+    <div class="kv"><span>Base Experience</span><span>${getBaseExperience(pokemon)}</span></div>
+    <div class="kv"><span>Capture Rate</span><span>${formatCaptureRate(species)}</span></div>
+    <div class="kv"><span>Base Happiness</span><span>${getBaseHappiness(species)}</span></div>
+    <div class="kv"><span>Locations</span>${tplLocationList(renderLocationItems(locations))}</div>`;
 }
+
+function tplListItem(text) {
+  return /*html*/ `
+    <li>${text}</li>`;
+}
+
+function tplLocationList(items) {
+  return /*html*/ `
+    <ul class="location_list">${items}</ul>`;
+}
+
 
 function showTabLoading(container) {
   container.innerHTML = /*html*/ `
@@ -81,16 +94,17 @@ function showTabLoading(container) {
     </div>`;
 }
 
+function tplStatItem(label, value, widthStyle) {
+  return /*html*/ `
+    <div class="bar">
+      <span class="bar_label">${label}</span>
+      <div class="bar_track"><i style="${widthStyle}">${value}</i></div>
+    </div>`;
+}
+
 function tplStats(pokemon) {
-  return (pokemon.stats ?? []).map(function (s) {
-    const value = s.base_stat;
-    const barWidthUI = Math.min(value, 150) / 1.5;
-    return /*html*/ `
-      <div class="bar">
-        <span class="bar_label">${s.stat.name}</span>
-        <div class="bar_track"><i style="width:${barWidthUI}%">${value}</i></div>
-      </div>`;
-  }).join("");
+  return /*html*/ `
+  ${renderStatItems(pokemon)}`;
 }
 
 function tplAbilitiesCards(cards) {
@@ -103,10 +117,16 @@ function tplAbilitiesCards(cards) {
   }).join("");
 }
 
-function tplEvoChain(pokeList) {
-  const separator = /*html*/ `<div class="evo_arrow">↓</div>`;
-  return /*html*/ `<div class="evo_chain">${pokeList.map(tplEvoItem).join(separator)}</div>`;
+function tplEvoSeparator() {
+  return /*html*/ `
+    <div class="evo_arrow">↓</div>`;
 }
+
+function tplEvoChain(pokeList) {
+  return /*html*/ `
+    <div class="evo_chain">${renderEvoItemsWithSeparator(pokeList)}</div>`;
+}
+
 
 function tplEvoItem(pokemon) {
   return /*html*/ `
