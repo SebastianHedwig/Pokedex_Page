@@ -1,8 +1,6 @@
 function getDefaultVarietyName(species) {
   const varieties = species && species.varieties ? species.varieties : [];
-  const def = varieties.find(function (variety) {
-    return variety.is_default;
-  });
+  const def = varieties.find(function (variety) {return variety.is_default});
   return def && def.pokemon ? def.pokemon.name : null;
 }
 

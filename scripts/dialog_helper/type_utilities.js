@@ -3,8 +3,7 @@ function getPrimaryType(pokemon, fallback = "unknown") {
 }
 
 function getTypesLabel(pokemon) {
-  return (pokemon?.types ?? [])
-    .map(t => t?.type?.name).filter(Boolean).join(", ");
+  return (pokemon?.types ?? []).map(t => t?.type?.name).filter(Boolean).join(", ");
 }
 
 function formatTypeLabel(type) {

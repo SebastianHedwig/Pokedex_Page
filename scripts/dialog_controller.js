@@ -1,7 +1,6 @@
-
 let currentDialogPokemon = null;
 
-// ========== Open/Close ==========
+// ========== Open / Close ==========
 function openPokeDialog(id) {
   const pokemon = pokeCache.find(function (e) { return e.id === id; });
   if (!pokemon) return;
@@ -52,7 +51,7 @@ function syncDialogNavButtons() {
   nextBtn.disabled = index >= (pokeCache.length - 1);
 }
 
-// ========== Tabs-Steuerung ==========
+// ========== Tab-Controls ==========
 async function setDialogTab(tab) {
   if (!currentDialogPokemon) return;
   updateActiveTab(tab);

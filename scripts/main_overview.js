@@ -31,6 +31,17 @@ function mergeIntoCache(list) {
   return pokeCache.length;
 }
 
+async function ensurePokemonInCacheByName(name) {
+  let pokemon = pokeCache.find(function (e) {
+    return e.name === name});
+
+  if (!pokemon) {
+    pokemon = await fetchPokemonData(name);
+    cachePokemon([pokemon]);
+  }
+  return pokemon;
+}
+
 // ========== Format- and Template-Helper ==========
 function formatName(name) {
   if (!name) return "Unknown";
