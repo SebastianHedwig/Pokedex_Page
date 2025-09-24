@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="./styles/overlay_start.css">
-        <link rel="stylesheet" href="./styles/standart.css">
-        <link rel="stylesheet" href="./styles/fonts.css">
-        <link rel="stylesheet" href="./styles/pokecard.css">
-        <link rel="stylesheet" href="./styles/poke_bg_colors.css">
-        <link rel="stylesheet" href="./styles/dex_dialog_interface.css">
-        <link rel="stylesheet" href="./styles/dex_dialog_infotabs.css">
-        <link rel="stylesheet" href="./styles/dialog_main.css">
-        <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/overlay_start.css">
+    <link rel="stylesheet" href="./styles/standart.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/pokecard.css">
+    <link rel="stylesheet" href="./styles/poke_bg_colors.css">
+    <link rel="stylesheet" href="./styles/dex_dialog_interface.css">
+    <link rel="stylesheet" href="./styles/dex_dialog_infotabs.css">
+    <link rel="stylesheet" href="./styles/dialog_main.css">
+    <link rel="stylesheet" href="./style.css">
 
-        <link rel="shortcut icon" href="./assets/icons/favicon_16_flaticon.png" type="image/x-icon">
-        <title>Pokedex</title>
-    </head>
+    <link rel="shortcut icon" href="./assets/icons/favicon_16_flaticon.png" type="image/x-icon">
+    <title>Pokedex</title>
+  </head>
 
-    <body onload="init()">
-        <div id="cover_overlay" class="overlay"></div>
-        
-        <header id="page_head"></header>
+  <body onload="init()">
+    <div id="cover_overlay" class="overlay"></div>
+    <header id="page_head"></header>
+    <section id="page_content"></section>
+    <footer id="page_footer"></footer>
+    <dialog id="dialog" class="d_none"></dialog>
 
-        <section id="page_content"></section>
+    <script src="./scripts/main_overview.js"></script>
+    <script src="./scripts/overlay_start.js"></script>
+    <script src="./scripts/main_templates.js"></script>
+    <script src="./scripts/poke_search.js"></script>
 
-        <footer id="page_footer"></footer>
+    <script src="./scripts/dialog_helper/constants_and_nav.js"></script>
+    <script src="./scripts/dialog_helper/type_utilities.js"></script>
+    <script src="./scripts/dialog_helper/stats_math.js"></script>
+    <script src="./scripts/dialog_helper/stats_accessors.js"></script>
+    <script src="./scripts/dialog_helper/fetch.js"></script>
+    <script src="./scripts/dialog_helper/species_evolution.js"></script>
+    <script src="./scripts/dialog_helper/cache_ensure.js"></script>
+    <script src="./scripts/dialog_helper/ability.js"></script>
+    <script src="./scripts/dialog_helper/ui_utilities.js"></script>
+    <script src="scripts/dialog_helper/main_formatters.js"></script>
 
-        <dialog id="dialog" class="d_none"></dialog>
+    <script src="./scripts/dialog_templates.js"></script>
 
-        <script src="./scripts/main_overview.js"></script>
-        <script src="./scripts/overlay_start.js"></script>
-        <script src="./scripts/main_templates.js"></script>
-        <script src="./scripts/poke_search.js"></script>
-        <script src="./scripts/dialog_helper.js"></script>
-        <script src="./scripts/dialog_templates.js"></script>
-        <script src="./scripts/dialog_controller.js"></script>
-        <script src="./script.js"></script>
-    </body>
+    <script src="./scripts/dialog_helper/render_main.js"></script>
+    <script src="./scripts/dialog_helper/render_stats.js"></script>
+    <script src="./scripts/dialog_helper/render_evo.js"></script>
+
+    <script src="./scripts/dialog_controller.js"></script>
+    <script src="./script.js"></script>
+  </body>
 </html>
