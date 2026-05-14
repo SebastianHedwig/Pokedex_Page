@@ -1,7 +1,7 @@
 // ========== Templates ==========
 function tplDialog(pokemon) {
   return /*html*/ `
-    <div class="dexdlg">
+    <div class="dexdlg" role="document" aria-labelledby="dlg_pokemon_name">
       ${tplLeft(pokemon)}
       ${tplRight("main")}
     </div>`;
@@ -23,16 +23,16 @@ function tplScreen(type, imgHtml) {
 function tplControls() {
   return /*html*/ `
     <div class="dexdlg_controls">
-      <button class="btn btn_primary" onclick="closePokeDialog()">Close</button>
-      <button id="btn_prev" class="btn" onclick="dialogPrev()">Previous</button>
-      <button id="btn_next" class="btn" onclick="dialogNext()">Next</button>
+      <button class="btn btn_primary" type="button" onclick="closePokeDialog()" aria-label="Close Pokemon details">Close</button>
+      <button id="btn_prev" class="btn" type="button" onclick="dialogPrev()" aria-label="Show previous Pokemon">Previous</button>
+      <button id="btn_next" class="btn" type="button" onclick="dialogNext()" aria-label="Show next Pokemon">Next</button>
     </div>`;
 }
 
 function tplMeta(name, type) {
   return /*html*/ `
     <div class="dexdlg_meta">
-      <div><strong>Name:</strong> ${name}</div>
+      <div id="dlg_pokemon_name"><strong>Name:</strong> ${name}</div>
       <div><strong>Class:</strong> ${formatTypeLabel(type)}</div>
     </div>`;
 }
@@ -41,7 +41,7 @@ function tplRight(active) {
   return /*html*/ `
     <div class="dexdlg_right">
       ${tplNav(active)}
-      <div id="dlg_tabcontent" class="dexdlg_content"></div>
+      <div id="dlg_tabcontent" class="dexdlg_content" role="tabpanel" tabindex="0" aria-labelledby="dlg_tab_${active}"></div>
     </div>`;
 }
 
@@ -50,8 +50,11 @@ function navButtonsHTML(active) {
     <button type="button"
             class="tab
             ${active === tab.id ? "is_active" : ""}"
-            data-tab="${tab.id}" role="tab"
+            id="dlg_tab_${tab.id}"
+            data-tab="${tab.id}"
+            role="tab"
             aria-selected="${active === tab.id}"
+            aria-controls="dlg_tabcontent"
             onclick="setDialogTab('${tab.id}')">
         ${tab.label}
     </button>`
@@ -60,7 +63,7 @@ function navButtonsHTML(active) {
 
 function tplNav(active) {
   return /*html*/ `
-    <nav class="dexdlg_nav" role="tablist">${navButtonsHTML(active)}</nav>`;
+    <nav class="dexdlg_nav" role="tablist" aria-label="Pokemon detail sections">${navButtonsHTML(active)}</nav>`;
 }
 
 // ========== Tab-Content ==========
@@ -88,8 +91,8 @@ function tplLocationList(items) {
 
 function showTabLoading(container) {
   container.innerHTML = /*html*/ `
-    <div class="tab_loading">
-      <div class="spinner"></div>
+    <div class="tab_loading" role="status" aria-live="polite" aria-label="Loading">
+      <div class="spinner" aria-hidden="true"></div>
     </div>`;
 }
 
@@ -118,7 +121,7 @@ function tplAbilitiesCards(cards) {
 
 function tplEvoSeparator() {
   return /*html*/ `
-    <div class="evo_arrow">↓</div>`;
+    <div class="evo_arrow" aria-hidden="true">↓</div>`;
 }
 
 function tplEvoChain(pokeList) {
@@ -128,7 +131,7 @@ function tplEvoChain(pokeList) {
 
 function tplEvoItem(pokemon) {
   return /*html*/ `
-    <button class="evo_card" onclick="openPokeDialog(${pokemon.id})" title="go to">
+    <button class="evo_card" type="button" onclick="openPokeDialog(${pokemon.id})" aria-label="Open details for ${formatName(pokemon.name)}">
       <div class="evo_img">${getPokemonImage(pokemon)}</div>
       <div class="evo_label">#${pokemon.id} ${formatName(pokemon.name)}</div>
     </button>`;

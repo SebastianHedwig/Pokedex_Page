@@ -16,5 +16,6 @@ function updateActiveTab(tab) {
   if (!btnActive) return;
   btnActive.classList.add("is_active");
   btnActive.setAttribute("aria-selected", "true");
+  getEl("dlg_tabcontent")?.setAttribute("aria-labelledby", btnActive.id);
   btnActive.focus();
 }

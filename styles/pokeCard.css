@@ -28,6 +28,11 @@
   cursor: pointer;
 }
 
+.poke_card:focus-visible {
+  outline: 0.25rem solid rgb(62, 96, 173);
+  outline-offset: 0.25rem;
+}
+
 .poke_img {
   height: 12rem;
   border: 0.15rem solid rgba(0, 0, 0, 0.8);
