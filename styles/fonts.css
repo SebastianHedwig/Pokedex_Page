@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Merienda";
-  src: url("../assets/fonts/Merienda/Merienda-VariableFont_wght.ttf") format("truetype");
+  src: url("../assets/fonts/merienda/merienda-variablefont_wght.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Oswald";
-  src: url("../assets/fonts/Oswald/Oswald-VariableFont_wght.ttf") format("truetype");
+  src: url("../assets/fonts/oswald/oswald-variablefont_wght.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -22,7 +22,7 @@ header, footer {
 
 @font-face {
   font-family: "Michroma";
-  src: url("../assets/fonts/Michroma/Michroma-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/michroma/michroma-regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

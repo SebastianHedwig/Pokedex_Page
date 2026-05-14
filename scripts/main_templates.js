@@ -9,7 +9,7 @@ function getHeaderTemplate(showBackLink = false) {
   return /*html*/ `
     <div id="header_content" class="content_wrapper p-lr-1r">
       <a href="./index.html" aria-label="Go to homepage">
-        <img class="header_logo" src="./assets/img/Pokedex_Logo_textstudio.png" alt="Pokedex Logo">
+        <img class="header_logo" src="./assets/img/pokedex_logo_textstudio.png" alt="Pokedex Logo">
       </a>
       ${showBackLink ? getHeaderBackLinkTemplate() : ""}
     </div>`;
@@ -27,7 +27,7 @@ function getPageContentSkeletonTemplate() {
   return /*html*/ `
     <div id="main_content_container" class="content_wrapper p-lr-1r">
       <div id="pokesearch_container">
-        <img id="pokesearch_title_img" src="./assets/img/Pokesearch_Logo_textstudio.png" alt="Pokesearch">
+        <img id="pokesearch_title_img" src="./assets/img/pokesearch_logo_textstudio.png" alt="Pokesearch">
         <form id="pokesearch_box" role="search" onsubmit="onSearchSubmit(event)">
           <label class="visually_hidden" for="pokesearch_input">Pokemon search</label>
           <input id="pokesearch_input" type="search" placeholder="search your Pokemon(s)" oninput="onSearchInput(event)">
